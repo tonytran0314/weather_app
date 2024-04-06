@@ -1,0 +1,54 @@
+$mainBackgroundColor:           rgb(10, 15, 25);
+$mainOpacityBackgroundColor:    rgb(10, 15, 25, .7);
+$cardContainerBackgroundColor:  rgb(14, 23, 39);
+$buttonBackgroundColor:         rgb(50, 138, 241); // highlight text color
+
+$white:                         rgb(255, 255, 255);
+$errorColor:                    rgb(243, 72, 125);
+$labelColor:                    rgb(98, 116, 139);
+$placeHolderColor:              rgb(65, 79, 96);
+$inputBottomBorderColor:        rgb(16, 32, 53);
+
+$baseDistance:                    8px;
+$fontFamily:                      'Roboto';
+$fontSize:                        16px;
+
+@mixin displayColumn($gap) {
+    display: flex;
+    flex-direction: column;
+    gap: $gap;
+}
+
+@mixin displayRow($gap) {
+    display: flex;
+    gap: $gap;
+}
+
+@mixin button($backgroundColor) {
+    border: none;
+    color: $white;
+    font-size: 1.1em;
+    border-radius: $baseDistance * 3;
+    padding: 10px 0;
+    cursor: pointer;
+    background-color: $backgroundColor;
+}
+
+@mixin input() {
+    border: none;
+    color: $white;
+    padding: calc($baseDistance/2) 0;
+    width: 100%;
+    background-color: $formContainerBackgroundColor;
+}
+
+@mixin allWaysCenter() {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin fitScreenSize() {
+    width: 100%;
+    height: 100vh;
+}

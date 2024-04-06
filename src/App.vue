@@ -1,47 +1,46 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+  import OptionsButton from './components/OptionsButton.vue';
+  import WeatherCard from './components/card/WeatherCard.vue';
+  import WeatherListAndSearch from './components/list_and_search/WeatherListAndSearch.vue';
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <div id="weather_container">
+    
+    <OptionsButton />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
+    <!-- display this -->
+    <WeatherCard />
+    <!-- or this -->
+    <!-- <WeatherListAndSearch /> -->
 
-  <main>
-    <TheWelcome />
-  </main>
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
+<style lang="scss" scoped>
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+  @import './assets/variables';
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+  #weather_container {
+    width: $baseDistance * 60;
+    height: 80vh;
+    background-color: $cardContainerBackgroundColor;
+    border-radius: $baseDistance * 3;
+    position: relative;
+    color: $white;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding: $baseDistance * 2;
+
+    // hide scrollbar for IE and Edge
+    -ms-overflow-style: none;
+
+    // hide scrollbar for Firefox
+    scrollbar-width: none;
+
+    // hide scrollbar for Chrome, Safari and Opera
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
 </style>

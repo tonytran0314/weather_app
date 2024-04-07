@@ -4,7 +4,7 @@
 
 <template>
     <div id="overview">
-        <div id="location">Tan Binh</div>
+        <div id="location">Lorton</div>
         <div id="current_tempurature">37°</div>
         <div id="current_status">Mostly Clear</div>
         <div id="highest_and_lowest">

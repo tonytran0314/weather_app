@@ -71,23 +71,157 @@
                 </svg>
             </div>
         </div>
-        <div class="detail_item" id="days"></div>
-        <div class="detail_item" id="air_quality"></div>
-        <div class="row">
-            <div class="detail_item row_item" id="uv_index"></div>
-            <div class="detail_item row_item" id="sunrise_sunset"></div>
+        <div class="detail_item" id="days">
+            <div class="title_container">
+                <div class="title_icon">icon</div>
+                <div class="title">10-DAY FORECAST</div>
+            </div>
+            <div id="days_forecast">
+                <!-- Start loop -->
+                <div class="days_forecast_item">
+                    <div class="date">Today</div>
+                    <div class="day_weather_status_icon">icon</div>
+                    <div class="tempurature_range">
+                        <div class="day_highest_tempurature">38°</div>
+                        <div class="tempurature_bar">bar</div>
+                        <div class="day_lowest_tempurature">57°</div>
+                    </div>
+                </div>
+                <!-- End loop -->
+                
+                <div class="days_forecast_item">
+                    <div class="date">Today</div>
+                    <div class="day_weather_status_icon">icon</div>
+                    <div class="tempurature_range">
+                        <div class="day_highest_tempurature">38°</div>
+                        <div class="tempurature_bar">bar</div>
+                        <div class="day_lowest_tempurature">57°</div>
+                    </div>
+                </div>
+                
+                <div class="days_forecast_item">
+                    <div class="date">Today</div>
+                    <div class="day_weather_status_icon">icon</div>
+                    <div class="tempurature_range">
+                        <div class="day_highest_tempurature">38°</div>
+                        <div class="tempurature_bar">bar</div>
+                        <div class="day_lowest_tempurature">57°</div>
+                    </div>
+                </div>
+                
+                <div class="days_forecast_item">
+                    <div class="date">Today</div>
+                    <div class="day_weather_status_icon">icon</div>
+                    <div class="tempurature_range">
+                        <div class="day_highest_tempurature">38°</div>
+                        <div class="tempurature_bar">bar</div>
+                        <div class="day_lowest_tempurature">57°</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="detail_item" id="air_quality">
+            <div class="title_container">
+                <div class="title_icon">icon</div>
+                <div class="title">AIR QUALITY</div>
+            </div>
+            <div id="air_quality_body">
+                <div id="air_quality_overview">37 - Good</div>
+                <div id="air_quality_description">Air quality index is 37, which is similar to yesterday at about this time</div>
+                <div id="air_quality_bar">bar</div>
+            </div>
         </div>
         <div class="row">
-            <div class="detail_item row_item" id="wind"></div>
-            <div class="detail_item row_item" id="precipitation"></div>
+            <div class="detail_item row_item" id="uv_index">
+                <div class="title_container">
+                    <div class="title_icon">icon</div>
+                    <div class="title">UV INDEX</div>
+                </div>
+                <div id="uv_index_body">
+                    <div id="uv_index_overview">
+                        <div id="uv_index_value">0</div>
+                        <div id="uv_index_status">Low</div>
+                    </div>
+                    <div id="uv_index_bar">bar</div>
+                    <div id="uv_index_description">Use sun protection <br /> 10AM-5PM</div>
+                </div>
+            </div>
+            <div class="detail_item row_item" id="sunrise_sunset">
+                <div class="title_container">
+                    <div class="title_icon">icon</div>
+                    <div class="title">SUNRISE/SET</div>
+                </div>
+                <div id="sunrise_sunset_body">
+                    <div id="sunrise_sunset_time">6:43AM</div>
+                    <div id="sunrise_sunset_graph">graph</div>
+                    <div id="sunrise_sunset_next">Sunset: 7:38PM</div>
+                </div>
+            </div>
         </div>
         <div class="row">
-            <div class="detail_item row_item" id="feels_like"></div>
-            <div class="detail_item row_item" id="humidity"></div>
+            <div class="detail_item row_item" id="wind">
+                <div class="title_container">
+                    <div class="title_icon">icon</div>
+                    <div class="title">WIND</div>
+                </div>
+                <div id="wind_comppa">compass graph</div>
+            </div>
+            <div class="detail_item row_item" id="precipitation">
+                <div class="title_container">
+                    <div class="title_icon">icon</div>
+                    <div class="title">PRECIPITATION</div>
+                </div>
+                <div id="precipitation_body">
+                    <div id="precipitation_overview">
+                        <div id="precipitation_value">0''</div>
+                        <div id="precipitation_period">in last 24h</div>
+                    </div>
+                    <div id="precipitation_description">Next expected is .55'' rain Thu</div>
+                </div>
+            </div>
         </div>
         <div class="row">
-            <div class="detail_item row_item" id="visibility"></div>
-            <div class="detail_item row_item" id="pressure"></div>
+            <div class="detail_item row_item" id="feels_like">
+                <div class="title_container">
+                    <div class="title_icon">icon</div>
+                    <div class="title">FEELS LIKE</div>
+                </div>
+                <div id="feels_like_body">
+                    <div id="feels_like_value">42°</div>
+                    <div id="feels_like_description">Wind is making it feel cooler</div>
+                </div>
+            </div>
+            <div class="detail_item row_item" id="humidity">
+                <div class="title_container">
+                    <div class="title_icon">icon</div>
+                    <div class="title">HUMIDITY</div>
+                </div>
+                <div id="humidity_body">
+                    <div id="humidity_value">62%</div>
+                    <div id="humidity_description">The dew point is 34° right now</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="detail_item row_item" id="visibility">
+                <div class="title_container">
+                    <div class="title_icon">icon</div>
+                    <div class="title">VISIBILITY</div>
+                </div>
+                <div id="visibility_body">
+                    <div id="visibility_value">19 mi</div>
+                    <div id="visibility_description">It's perfectly clear right now</div>
+                </div>
+            </div>
+            <div class="detail_item row_item" id="pressure">
+                <div class="title_container">
+                    <div class="title_icon">icon</div>
+                    <div class="title">PRESSURE</div>
+                </div>
+                <div id="pressure_body">
+                    <div id="pressure_graph">graph</div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -134,12 +268,62 @@
                     flex-direction: column;
                     align-items: center;
                     gap: $baseDistance;
-                    // background-color: aqua;
                 }
             }
             
         }
 
+        #days {
+            display: flex;
+            flex-direction: column;
+            gap: $baseDistance;
+
+            #days_forecast {
+                display: flex;
+                flex-direction: column;
+                gap: $baseDistance;
+
+                .days_forecast_item {
+                    display: flex;
+                    justify-content: space-between;
+                    border-top: 1px solid $labelColor;
+                    padding: $baseDistance*1.5 0 $baseDistance 0;
+
+                    .tempurature_range {
+                        display: flex;
+                    }
+                }
+            }
+        }
+
+        #air_quality {
+            display: flex;
+            flex-direction: column;
+            gap: $baseDistance;
+
+            #air_quality_overview {
+                font-size: 1.3em;
+            }
+
+            #air_quality_body {
+                display: flex;
+                flex-direction: column;
+                gap: $baseDistance * 2;
+            }
+        }
+
+        
+        .title_container {
+            display: flex;
+            gap: $baseDistance;
+            color: $labelColor;
+
+            .title {
+                font-size: 0.8em;
+            }
+        }
+
+        // ========================================================== //
         .row {
             display: flex;
             gap: $baseDistance;
@@ -147,6 +331,10 @@
             .row_item {
                 width: 50%;
             }
+        }
+
+        #uv_index {
+
         }
     }
 

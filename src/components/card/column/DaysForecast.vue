@@ -54,6 +54,30 @@
     </div>
 </template>
 
-<style>
-    
+<style lang="scss" scoped>
+
+    @import '/src/assets/variables';
+
+    #days {
+        display: flex;
+        flex-direction: column;
+        gap: $baseDistance;
+
+        #days_forecast {
+            display: flex;
+            flex-direction: column;
+            gap: $baseDistance;
+
+            .days_forecast_item {
+                display: flex;
+                justify-content: space-between;
+                border-top: 1px solid $labelColor;
+                padding: $baseDistance*1.5 0 $baseDistance 0;
+
+                .tempurature_range {
+                    display: flex;
+                }
+            }
+        }
+    }
 </style>

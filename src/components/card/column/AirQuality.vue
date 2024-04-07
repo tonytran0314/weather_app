@@ -16,6 +16,23 @@
     </div>
 </template>
 
-<style>
-    
+<style lang="scss" scoped>
+
+    @import '/src/assets/variables';
+
+    #air_quality {
+        display: flex;
+        flex-direction: column;
+        gap: $baseDistance;
+
+        #air_quality_overview {
+            font-size: 1.3em;
+        }
+
+        #air_quality_body {
+            display: flex;
+            flex-direction: column;
+            gap: $baseDistance * 2;
+        }
+    }
 </style>

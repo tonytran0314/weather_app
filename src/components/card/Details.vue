@@ -40,7 +40,7 @@
 
 <style lang="scss">
 
-    @import '../../assets/variables';
+    @import '/src/assets/variables';
 
     #details {
         width: 100%;
@@ -54,76 +54,6 @@
             background-color: $mainOpacityBackgroundColor;
             padding: $baseDistance * 2;
         }
-
-        #hours {
-            display: flex;
-            justify-content: space-between;
-            gap: $baseDistance * 2;
-
-            #left_arrow, #right_arrow{
-                display: flex;
-                align-items: center;
-                cursor: pointer;
-                // background-color: red;
-            }
-
-            #hour_slides {
-                display: flex;
-                align-items: center;
-                gap: $baseDistance * 4;
-                overflow: hidden;
-                width: 100%;
-                // background-color: red;
-
-                .hour_item {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    gap: $baseDistance;
-                }
-            }
-            
-        }
-
-        #days {
-            display: flex;
-            flex-direction: column;
-            gap: $baseDistance;
-
-            #days_forecast {
-                display: flex;
-                flex-direction: column;
-                gap: $baseDistance;
-
-                .days_forecast_item {
-                    display: flex;
-                    justify-content: space-between;
-                    border-top: 1px solid $labelColor;
-                    padding: $baseDistance*1.5 0 $baseDistance 0;
-
-                    .tempurature_range {
-                        display: flex;
-                    }
-                }
-            }
-        }
-
-        #air_quality {
-            display: flex;
-            flex-direction: column;
-            gap: $baseDistance;
-
-            #air_quality_overview {
-                font-size: 1.3em;
-            }
-
-            #air_quality_body {
-                display: flex;
-                flex-direction: column;
-                gap: $baseDistance * 2;
-            }
-        }
-
         
         .title_container {
             display: flex;
@@ -135,7 +65,6 @@
             }
         }
 
-        // ========================================================== //
         .row {
             display: flex;
             gap: $baseDistance;

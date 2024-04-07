@@ -72,6 +72,35 @@
         </div>
 </template>
 
-<style>
-    
+<style lang="scss" scoped>
+
+    @import '/src/assets/variables';
+
+    #hours {
+        display: flex;
+        justify-content: space-between;
+        gap: $baseDistance * 2;
+
+        #left_arrow, #right_arrow{
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        #hour_slides {
+            display: flex;
+            align-items: center;
+            gap: $baseDistance * 4;
+            overflow: hidden;
+            width: 100%;
+
+            .hour_item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: $baseDistance;
+            }
+        }
+        
+    }
 </style>

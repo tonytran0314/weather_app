@@ -26,7 +26,7 @@
                     <div id="icon">
                         <img src="/src/assets/images/clear.png" />
                     </div>
-                    <div id="tempurature">37°</div>
+                    <div id="temperature">37°</div>
                 </div>
                 <!-- End loop -->
 
@@ -34,25 +34,25 @@
                     <div id="time">6AM</div>
                     <div id="icon">
                         <img src="/src/assets/images/clear.png" /></div>
-                    <div id="tempurature">36°</div>
+                    <div id="temperature">36°</div>
                 </div>
                 <div class="hour_item">
                     <div id="time">6:45AM</div>
                     <div id="icon">
                         <img src="/src/assets/images/clear.png" /></div>
-                    <div id="tempurature">Sunrise</div>
+                    <div id="temperature">Sunrise</div>
                 </div>
                 <div class="hour_item">
                     <div id="time">7AM</div>
                     <div id="icon">
                         <img src="/src/assets/images/clear.png" /></div>
-                    <div id="tempurature">36°</div>
+                    <div id="temperature">36°</div>
                 </div>
                 <div class="hour_item">
                     <div id="time">8AM</div>
                     <div id="icon">
                         <img src="/src/assets/images/clear.png" /></div>
-                    <div id="tempurature">38°</div>
+                    <div id="temperature">38°</div>
                 </div>
 
             </div>

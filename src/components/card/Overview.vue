@@ -5,7 +5,7 @@
 <template>
     <div id="overview">
         <div id="location">Lorton</div>
-        <div id="current_tempurature">37°</div>
+        <div id="current_temperature">37°</div>
         <div id="current_status">Mostly Clear</div>
         <div id="highest_and_lowest">
             H:54° L:36°
@@ -32,7 +32,7 @@
             font-size: 1.1em;
         }
 
-        #current_tempurature {
+        #current_temperature {
             font-size: 5em;
         }
     }

@@ -1,5 +1,5 @@
 <script setup>
-    
+    import Bar from "../visualization/Bar.vue";
 </script>
 
 <template>
@@ -18,7 +18,8 @@
                 <div id="uv_index_value">0</div>
                 <div id="uv_index_status">Low</div>
             </div>
-            <div id="uv_index_bar">bar</div>
+            <Bar
+                value="1" />
             <div id="uv_index_description">Use sun protection <br /> 10AM-5PM</div>
         </div>
     </div>

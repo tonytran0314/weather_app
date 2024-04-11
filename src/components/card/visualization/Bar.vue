@@ -1,15 +1,42 @@
 <script setup>
-    
+
+    import { computed } from 'vue'
+
+    const aqiGradient = 'linear-gradient(to right, green, yellow, orange, red, purple, maroon)'
+    const uviGradient = 'linear-gradient(to right, green, yellow, orange, red, purple)'
+
+    const props = defineProps({
+        type: {
+            type: String
+        },
+        value: {
+            type: Number,
+            required: true
+        }
+    })
+
+    const gradient = computed(() => {
+        return props.type == 'aqi' ? aqiGradient : uviGradient
+    })
+
+    const marginLeft = computed(() => {
+        const UV_HIGH = 11;
+        const AQI_HIGH = 301;
+        const VALUE_CIRLE_WIDTH = 8; //px
+
+        const highValue = props.type == 'aqi' ? AQI_HIGH : UV_HIGH
+
+        if(props.value >= highValue) {
+            return 'calc(100% - ' + VALUE_CIRLE_WIDTH + 'px)'
+        }
+        
+        return (props.value * 100 / highValue) + '%'
+    })
 </script>
 
 <template>
-
     <div class="bar_container">
-        <div class="temp_range">
-            <div class="gradient">
-                <div class="current_temp"></div>
-            </div>
-        </div>
+        <div class="current_value"></div>
     </div>
 </template>
 
@@ -18,38 +45,19 @@
     @import "/src/assets/variables";
 
     .bar_container {
-        width: 100px;
-        height: 8px;
-        background-color: $labelColor;
+        width: 100%;
+        height: $baseDistance;
         border-radius: $baseDistance;
-        position: relative;
+        background-image: v-bind(gradient);
 
-        .temp_range {
-            width: 56%;
+        .current_value {
+            margin-left: v-bind(marginLeft); // param
+
+            width: $baseDistance;
             height: 100%;
-            border-radius: $baseDistance;
-            overflow: hidden;
-            margin-left: 32%;
-            position: absolute;
-
-
-            .gradient {
-                width: 100px;
-                height: 100%;
-                background-image: linear-gradient(to right, cyan, cyan, orange);
-                border-radius: $baseDistance;
-                position: absolute;
-                left: -56%;
-
-                .current_temp {
-                    width: 8px;
-                    height: 100%;
-                    background-color: white;
-                    border-radius: 50%;
-                    border: 1px solid black;
-                    margin-left: 55%;
-                }
-            }
+            background-color: $white;
+            border-radius: 50%;
+            border: 1px solid black;
         }
     }
     

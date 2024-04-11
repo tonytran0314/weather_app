@@ -1,5 +1,5 @@
 <script setup>
-    
+    import Bar from "../visualization/Bar.vue";
 </script>
 
 <template>
@@ -15,7 +15,9 @@
         <div id="air_quality_body">
             <div id="air_quality_overview">37 - Good</div>
             <div id="air_quality_description">Air quality index is 37, which is similar to yesterday at about this time</div>
-            <div id="air_quality_bar">bar</div>
+            <Bar
+                type="aqi"
+                value="400" />
         </div>
     </div>
 </template>

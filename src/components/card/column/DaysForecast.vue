@@ -1,5 +1,4 @@
 <script setup>
-import Bar from "../visualization/Bar.vue";
 </script>
 
 <template>
@@ -31,11 +30,8 @@ import Bar from "../visualization/Bar.vue";
           <img src="/src/assets/images/clear.png" />
         </div>
         <div class="temperature_range">
-          <div class="day_highest_temperature">38°</div>
-          <div class="temperature_bar">
-            <Bar />
-          </div>
-          <div class="day_lowest_temperature">52°</div>
+          <div class="day_highest_temperature">60°</div>
+          <div class="day_lowest_temperature">79°</div>
         </div>
       </div>
       <!-- End loop -->

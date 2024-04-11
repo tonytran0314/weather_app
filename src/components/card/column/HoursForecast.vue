@@ -1,10 +1,28 @@
 <script setup>
-    
+
+    import { ref, computed } from 'vue'
+
+    const positionNumber = ref(0)
+    const slideDistance = 50
+    const slidePosition = computed(() => {
+        return positionNumber.value + 'px'
+    })
+
+    console.log(positionNumber.value)
+    const leftArrowClick = computed(() => {
+        positionNumber.value += slideDistance
+    console.log(positionNumber.value)
+    })
+
+    const rightArrowClick = () => {
+        positionNumber.value -= slideDistance
+    console.log(positionNumber.value)
+    }
 </script>
 
 <template>
     <div class="detail_item" id="hours">
-            <div id="left_arrow">
+            <div id="left_arrow" @click="leftArrowClick">
                 <svg 
                     width="32px" height="32px" 
                     viewBox="0 0 24 24" 
@@ -18,45 +36,69 @@
                             stroke-linejoin="round"/>
                 </svg>
             </div>
-            <div id="hour_slides">
-            <!-- CHECK CLASS OR ID -->
-                <!-- Start loop -->
-                <div class="hour_item">
-                    <div id="time">Now</div>
-                    <div id="icon">
-                        <img src="/src/assets/images/clear.png" />
+            <div id="hour_slides_container">
+                <div id="hour_slides">
+                    <!-- Start loop -->
+                    <div class="hour_item">
+                        <div class="time">Now</div>
+                        <div class="icon">
+                            <img src="/src/assets/images/clear.png" />
+                        </div>
+                        <div class="temperature">37°</div>
                     </div>
-                    <div id="temperature">37°</div>
-                </div>
-                <!-- End loop -->
+                    <!-- End loop -->
 
-                <div class="hour_item">
-                    <div id="time">6AM</div>
-                    <div id="icon">
-                        <img src="/src/assets/images/clear.png" /></div>
-                    <div id="temperature">36°</div>
+                    <div class="hour_item">
+                        <div class="time">6AM</div>
+                        <div class="icon">
+                            <img src="/src/assets/images/clear.png" /></div>
+                        <div class="temperature">36°</div>
+                    </div>
+                    <div class="hour_item">
+                        <div class="time">6:45AM</div>
+                        <div class="icon">
+                            <img src="/src/assets/images/clear.png" /></div>
+                        <div class="temperature">Sunrise</div>
+                    </div>
+                    <div class="hour_item">
+                        <div class="time">7AM</div>
+                        <div class="icon">
+                            <img src="/src/assets/images/clear.png" /></div>
+                        <div class="temperature">36°</div>
+                    </div>
+                    <div class="hour_item">
+                        <div class="time">8AM</div>
+                        <div class="icon">
+                            <img src="/src/assets/images/clear.png" /></div>
+                        <div class="temperature">38°</div>
+                    </div>
+                    <div class="hour_item">
+                        <div class="time">6AM</div>
+                        <div class="icon">
+                            <img src="/src/assets/images/clear.png" /></div>
+                        <div class="temperature">36°</div>
+                    </div>
+                    <div class="hour_item">
+                        <div class="time">6:45AM</div>
+                        <div class="icon">
+                            <img src="/src/assets/images/clear.png" /></div>
+                        <div class="temperature">Sunrise</div>
+                    </div>
+                    <div class="hour_item">
+                        <div class="time">7AM</div>
+                        <div class="icon">
+                            <img src="/src/assets/images/clear.png" /></div>
+                        <div class="temperature">36°</div>
+                    </div>
+                    <div class="hour_item">
+                        <div class="time">8AM</div>
+                        <div class="icon">
+                            <img src="/src/assets/images/clear.png" /></div>
+                        <div class="temperature">38°</div>
+                    </div>
                 </div>
-                <div class="hour_item">
-                    <div id="time">6:45AM</div>
-                    <div id="icon">
-                        <img src="/src/assets/images/clear.png" /></div>
-                    <div id="temperature">Sunrise</div>
-                </div>
-                <div class="hour_item">
-                    <div id="time">7AM</div>
-                    <div id="icon">
-                        <img src="/src/assets/images/clear.png" /></div>
-                    <div id="temperature">36°</div>
-                </div>
-                <div class="hour_item">
-                    <div id="time">8AM</div>
-                    <div id="icon">
-                        <img src="/src/assets/images/clear.png" /></div>
-                    <div id="temperature">38°</div>
-                </div>
-
             </div>
-            <div id="right_arrow">
+            <div id="right_arrow" @click="rightArrowClick">
                 <svg 
                     width="32px" height="32px" 
                     viewBox="0 0 24 24" 
@@ -88,22 +130,34 @@
             cursor: pointer;
         }
 
-        #hour_slides {
-            display: flex;
-            align-items: center;
-            gap: $baseDistance * 4;
+        #hour_slides_container {
             overflow: hidden;
             width: 100%;
+            height: 100px;
+            position: relative;
+            background-color: red;
+            scroll-snap-type: x mandatory;
 
-            .hour_item {
+            #hour_slides {
                 display: flex;
-                flex-direction: column;
+                gap: $baseDistance * 4;
                 align-items: center;
-                gap: $baseDistance;
+                position: absolute;
+                left: 0;
+                transform: translateX(v-bind(slidePosition));
+                transition: .3s ease;
+                background-color: green;
 
-                #icon {
-                    img {
-                        width: $baseDistance * 4;
+                .hour_item {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: $baseDistance;
+
+                    .icon {
+                        img {
+                            width: $baseDistance * 4;
+                        }
                     }
                 }
             }

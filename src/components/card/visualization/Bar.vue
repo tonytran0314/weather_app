@@ -10,7 +10,7 @@
             type: String
         },
         value: {
-            type: Number,
+            type: String,
             required: true
         }
     })

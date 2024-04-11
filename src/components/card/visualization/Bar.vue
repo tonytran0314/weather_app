@@ -45,10 +45,11 @@
     @import "/src/assets/variables";
 
     .bar_container {
+        background-image: v-bind(gradient); // param
+
         width: 100%;
         height: $baseDistance;
         border-radius: $baseDistance;
-        background-image: v-bind(gradient);
 
         .current_value {
             margin-left: v-bind(marginLeft); // param

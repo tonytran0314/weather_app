@@ -96,6 +96,7 @@
                     </div>
                     <div class="temperature">37°</div>
                 </swiper-slide>
+                
         </swiper-container>
         
         <button class="next_arrow">

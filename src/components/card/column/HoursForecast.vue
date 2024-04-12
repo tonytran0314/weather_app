@@ -1,118 +1,118 @@
 <script setup>
-
-    import { ref, computed } from 'vue'
-
-    const positionNumber = ref(0)
-    const slideDistance = 50
-    const slidePosition = computed(() => {
-        return positionNumber.value + 'px'
-    })
-
-    console.log(positionNumber.value)
-    const leftArrowClick = computed(() => {
-        positionNumber.value += slideDistance
-    console.log(positionNumber.value)
-    })
-
-    const rightArrowClick = () => {
-        positionNumber.value -= slideDistance
-    console.log(positionNumber.value)
-    }
+    // import function to register Swiper custom elements
+    import { register } from 'swiper/element/bundle';
+    // register Swiper custom elements
+    register();
 </script>
 
 <template>
-    <div class="detail_item" id="hours">
-            <div id="left_arrow" @click="leftArrowClick">
-                <svg 
-                    width="32px" height="32px" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    xmlns="http://www.w3.org/2000/svg">
-                        <path 
-                            d="M15 7L10 12L15 17" 
-                            stroke="#FFFFFF" 
-                            stroke-width="1.5" 
-                            stroke-linecap="round" 
-                            stroke-linejoin="round"/>
-                </svg>
-            </div>
-            <div id="hour_slides_container">
-                <div id="hour_slides">
-                    <!-- Start loop -->
-                    <div class="hour_item">
-                        <div class="time">Now</div>
-                        <div class="icon">
-                            <img src="/src/assets/images/clear.png" />
-                        </div>
-                        <div class="temperature">37°</div>
-                    </div>
-                    <!-- End loop -->
+    <div id="hours">
+        <button class="prev_arrow">
+            <svg 
+                width="32px" height="32px" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg">
+                    <path 
+                        d="M15 7L10 12L15 17" 
+                        stroke="#FFFFFF" 
+                        stroke-width="1.5" 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round"/>
+            </svg>
+        </button>
 
-                    <div class="hour_item">
-                        <div class="time">6AM</div>
-                        <div class="icon">
-                            <img src="/src/assets/images/clear.png" /></div>
-                        <div class="temperature">36°</div>
+        <swiper-container
+            class="swiper_container"
+            slides-per-view="5"
+            grab-cursor="true"
+            :navigation="{
+                nextEl: '.next_arrow',
+                prevEl: '.prev_arrow',
+            }" >
+
+            <!-- START LOOP -->
+                <swiper-slide class="slide_item">
+                    <div class="time">Now</div>
+                    <div class="icon">
+                        <img src="/src/assets/images/clear.png" />
                     </div>
-                    <div class="hour_item">
-                        <div class="time">6:45AM</div>
-                        <div class="icon">
-                            <img src="/src/assets/images/clear.png" /></div>
-                        <div class="temperature">Sunrise</div>
+                    <div class="temperature">37°</div>
+                </swiper-slide>
+            <!-- END LOOP -->
+                <swiper-slide class="slide_item">
+                    <div class="time">Now</div>
+                    <div class="icon">
+                        <img src="/src/assets/images/clear.png" />
                     </div>
-                    <div class="hour_item">
-                        <div class="time">7AM</div>
-                        <div class="icon">
-                            <img src="/src/assets/images/clear.png" /></div>
-                        <div class="temperature">36°</div>
+                    <div class="temperature">37°</div>
+                </swiper-slide>
+                <swiper-slide class="slide_item">
+                    <div class="time">Now</div>
+                    <div class="icon">
+                        <img src="/src/assets/images/clear.png" />
                     </div>
-                    <div class="hour_item">
-                        <div class="time">8AM</div>
-                        <div class="icon">
-                            <img src="/src/assets/images/clear.png" /></div>
-                        <div class="temperature">38°</div>
+                    <div class="temperature">37°</div>
+                </swiper-slide>
+                <swiper-slide class="slide_item">
+                    <div class="time">Now</div>
+                    <div class="icon">
+                        <img src="/src/assets/images/clear.png" />
                     </div>
-                    <div class="hour_item">
-                        <div class="time">6AM</div>
-                        <div class="icon">
-                            <img src="/src/assets/images/clear.png" /></div>
-                        <div class="temperature">36°</div>
+                    <div class="temperature">37°</div>
+                </swiper-slide>
+                <swiper-slide class="slide_item">
+                    <div class="time">Now</div>
+                    <div class="icon">
+                        <img src="/src/assets/images/clear.png" />
                     </div>
-                    <div class="hour_item">
-                        <div class="time">6:45AM</div>
-                        <div class="icon">
-                            <img src="/src/assets/images/clear.png" /></div>
-                        <div class="temperature">Sunrise</div>
+                    <div class="temperature">37°</div>
+                </swiper-slide>
+                <swiper-slide class="slide_item">
+                    <div class="time">Now</div>
+                    <div class="icon">
+                        <img src="/src/assets/images/clear.png" />
                     </div>
-                    <div class="hour_item">
-                        <div class="time">7AM</div>
-                        <div class="icon">
-                            <img src="/src/assets/images/clear.png" /></div>
-                        <div class="temperature">36°</div>
+                    <div class="temperature">37°</div>
+                </swiper-slide>
+                <swiper-slide class="slide_item">
+                    <div class="time">Now</div>
+                    <div class="icon">
+                        <img src="/src/assets/images/clear.png" />
                     </div>
-                    <div class="hour_item">
-                        <div class="time">8AM</div>
-                        <div class="icon">
-                            <img src="/src/assets/images/clear.png" /></div>
-                        <div class="temperature">38°</div>
+                    <div class="temperature">37°</div>
+                </swiper-slide>
+                <swiper-slide class="slide_item">
+                    <div class="time">Now</div>
+                    <div class="icon">
+                        <img src="/src/assets/images/clear.png" />
                     </div>
-                </div>
-            </div>
-            <div id="right_arrow" @click="rightArrowClick">
-                <svg 
-                    width="32px" height="32px" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    xmlns="http://www.w3.org/2000/svg">
-                        <path 
-                            d="M10 7L15 12L10 17" 
-                            stroke="#FFFFFF" 
-                            stroke-width="1.5" 
-                            stroke-linecap="round" 
-                            stroke-linejoin="round"/>
-                </svg>
-            </div>
-        </div>
+                    <div class="temperature">37°</div>
+                </swiper-slide>
+                <swiper-slide class="slide_item">
+                    <div class="time">Now</div>
+                    <div class="icon">
+                        <img src="/src/assets/images/clear.png" />
+                    </div>
+                    <div class="temperature">37°</div>
+                </swiper-slide>
+        </swiper-container>
+        
+        <button class="next_arrow">
+            <svg 
+                width="32px" height="32px" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg">
+                    <path 
+                        d="M10 7L15 12L10 17" 
+                        stroke="#FFFFFF" 
+                        stroke-width="1.5" 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round"/>
+            </svg>
+        </button>
+    </div>
 </template>
 
 <style lang="scss" scoped>
@@ -121,47 +121,34 @@
 
     #hours {
         display: flex;
-        justify-content: space-between;
         gap: $baseDistance * 2;
 
-        #left_arrow, #right_arrow{
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        #hour_slides_container {
-            overflow: hidden;
+        .swiper_container {
+            // swiper-slide width would be overflow (huge width), the below code would fix it.
             width: 100%;
-            height: 100px;
-            position: relative;
-            background-color: red;
-            scroll-snap-type: x mandatory;
+            max-width: 100%;
+            max-height: 100vh;
+            min-height: 0;
+            min-width: 0;
 
-            #hour_slides {
+            .slide_item {
                 display: flex;
-                gap: $baseDistance * 4;
-                align-items: center;
-                position: absolute;
-                left: 0;
-                transform: translateX(v-bind(slidePosition));
-                transition: .3s ease;
-                background-color: green;
+                flex-direction: column;
+                text-align: center;
+                gap: $baseDistance * 1.5;
 
-                .hour_item {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    gap: $baseDistance;
-
-                    .icon {
-                        img {
-                            width: $baseDistance * 4;
-                        }
+                .icon {
+                    img {
+                        width: $baseDistance * 4;
                     }
                 }
             }
         }
-        
+
+        .prev_arrow, .next_arrow{
+            cursor: pointer;
+            border: none;
+            background-color: $cardContainerBackgroundColor;
+        }
     }
 </style>

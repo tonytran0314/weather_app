@@ -5,28 +5,150 @@
     onMounted(() => {
         const ctx = document.getElementById('sunrise_sunset_chart');
         const PI = Math.PI
-        const DATA_COUNT = 6.5;
-        const labels = [];
 
-        for (let i = 0; i < DATA_COUNT; i=i+0.5) {
-            labels.push(i.toString());
+        Chart.pluginService.register({
+    beforeInit: function(chart) {
+        // We get the chart data
+        var data = chart.config.data;
+
+        // For every dataset ...
+        for (var i = 0; i < data.datasets.length; i++) {
+
+            // For every label ...
+            for (var j = 0; j < data.labels.length; j++) {
+
+                // We get the dataset's function and calculate the value
+                var fct = data.datasets[i].function,
+                    x = data.labels[j],
+                    y = fct(x);
+                // Then we add the value to the dataset data
+                data.datasets[i].data.push(y);
+            }
         }
-        labels.push(6.28)
+    }
+});
+        const labels = [
+            0, 
+            PI/8, 
+            PI/4, 
+            3*PI/8,
+
+            PI/2, 
+
+            5*PI/8, 
+            3*PI/4, 
+            7*PI/8, 
+
+            PI,
+
+            9*PI/8, 
+            5*PI/4,
+            11*PI/8, 
+
+            3*PI/2,
+            
+            13*PI/8,
+            7*PI/4, 
+            15*PI/8,
+            2*PI
+        ];
 
         let data = {
             labels: labels, // x values
             datasets: [
                 {
-                    data: [-1, -0.878, -0.54, -0.071, 0.416, 0.801, 0.99, 0.936, 0.654, 0.211, -0.284, -0.709, -0.96, -0.977], // y values
-                    // (0,-1)
-                    // (0.5, -0.878)
-                    // ...
-                    borderWidth: 1
+                    type: 'line',
+                    function: function(x) {
+                        return x
+                    },
+                    data: [],
+                    borderWidth: 3,
+                    fill: false
                 },
-                {
-                    data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0], // y values
-                    borderWidth: 1
-                }
+                // {
+                //     // below y = 0
+                //     type: 'line',
+
+                //     // y values
+                //     // data: [
+                //     //     -1, 
+                //     //     -0.924, 
+                //     //     -0.707, 
+                //     //     -0.383,
+                //     //     0, 
+                //     //     NaN, NaN, NaN, NaN, NaN, NaN, NaN,
+                //     //     0, 
+                //     //     -0.383, 
+                //     //     -0.707, 
+                //     //     -0.924, 
+                //     //     -1
+                //     // ],
+                //     // (0,-1)
+                //     // (PI/4, -0.707)
+                //     // ...
+                //     borderWidth: 3,
+                //     elements: {
+                //         point: {
+                //             radius: 0
+                //         }
+                //     },
+                // },
+                // {
+                //     // above y = 0
+                //     type: 'line',
+                //     // data: [
+                //     //     NaN, NaN, NaN, NaN, 
+                //     //     0, 
+                //     //     0.383,
+                //     //     0.707,
+                //     //     0.924, 
+                //     //     1, 
+                //     //     0.924,
+                //     //     0.707,
+                //     //     0.383, 
+                //     //     0, 
+                //     //     NaN, NaN, NaN, NaN
+                //     // ],
+                //     borderWidth: 3,
+                //     elements: {
+                //         point: {
+                //             radius: 0
+                //         }
+                //     },
+                // },
+                // {
+                //     // y = 0
+                //     type: 'line',
+                //     data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                //     borderWidth: 5,
+                //     elements: {
+                //         point: {
+                //             radius: 0
+                //         }
+                //     },
+                // },
+                // {
+                //     type: 'scatter',
+                //     data: [
+                //         {
+                //             x: 0,
+                //             y: 0
+                //         },
+                //         {
+                //             x: 2*PI,
+                //             y: 0
+                //         },
+                //         {
+                //             x: PI,
+                //             y: 0
+                //         },
+                //         // CURRENT
+                //         {
+                //             x: 1,
+                //             y: -0.54
+                //         }
+                //     ]
+                // }
             ]
         }
 
@@ -34,7 +156,6 @@
         let options = {
             scales: {
                 y: {
-                    // backgroundColor: "#FFFFFF",
                     min: -1,
                     max: 1.3,
                     ticks: {
@@ -48,9 +169,8 @@
                     }
                 },
                 x: {
-                    // backgroundColor: "#FFFFFF",
                     min: 0,
-                    max: 4*PI,
+                    max: 20,
                     ticks: {
                         display: false
                     },
@@ -70,24 +190,17 @@
                     enable: false
                 }
             },
-            elements: {
-                point: {
-                    radius: 0
-                }
-            },
             tension: 0.5
         }
         
 
         new Chart(ctx, {
-            type: 'line',
             data,
             options
         });
     })
 
     // const config = {
-    //     type: 'line',
     //     data: {},
     //     options: {},
     //     plugins: []

@@ -36,22 +36,30 @@
                 y: {
                     // backgroundColor: "#FFFFFF",
                     min: -1,
-                    max: 1,
-                    // ticks: {
-                    //     display: false
-                    // },
-                    // grid: {
-                    //     display: false
-                    // },
-                    // border: {
-                    //     display: false
-                    // }
+                    max: 1.3,
+                    ticks: {
+                        display: false
+                    },
+                    grid: {
+                        display: false
+                    },
+                    border: {
+                        display: false
+                    }
                 },
                 x: {
                     // backgroundColor: "#FFFFFF",
                     min: 0,
                     max: 4*PI,
-                    
+                    ticks: {
+                        display: false
+                    },
+                    grid: {
+                        display: false
+                    },
+                    border: {
+                        display: false
+                    }
                 }
             },
             plugins: {
@@ -62,11 +70,11 @@
                     enable: false
                 }
             },
-            // elements: {
-            //     point: {
-            //         radius: 0
-            //     }
-            // },
+            elements: {
+                point: {
+                    radius: 0
+                }
+            },
             tension: 0.5
         }
         

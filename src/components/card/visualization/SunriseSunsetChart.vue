@@ -2,12 +2,8 @@
 </script>
 
 <template>
-    <div id="sunrise_sunset_chart">
-        <div class="dot"></div>
-        <svg height="110px">
-            <circle cx="50" cy="50" r="50" id="night_section"></circle>
-            <circle cx="50" cy="50" r="50" id="day_section"></circle>
-        </svg>
+    <div id="sunrise_sunset_chart_container">
+        <div id="sunrise_sunset_circle"></div>
     </div>
 </template>
 
@@ -15,37 +11,25 @@
 
     @import "/src/assets/variables";
 
-    #sunrise_sunset_chart {
+    #sunrise_sunset_chart_container {
+        width: 100%;
+        height: auto;
+        padding: $baseDistance;
+        display: flex;
+        justify-content: center;
         // background-color: gray;
         position: relative;
-        
 
-        .dot {
-            width: 12px;
-            height: 12px;
-            background-color: $white;
+        #sunrise_sunset_circle {
+            width: $baseDistance * 15;
+            height: $baseDistance * 15;
+            // background-color: red;
             border-radius: 50%;
-            position: absolute;
-            // box-shadow: 0 0 20px $white, 0 0 60px $white;
-            transform: rotate(160deg);
-            left: 20px;
-            border-top-color: red;
-        }
-
-        svg { 
-            circle {
-                fill: transparent;
-                stroke-width: 5;
-                transform: translate(50px, 5px);
-            }
-
-            #day_section {
-                stroke: $labelColor;
-                stroke-dasharray: 160;
-            }
-            #night_section {
-                stroke: $white;
-            }
+            border-left: 4px solid $white;
+            border-top: 4px solid $white;
+            border-right: 2px solid $labelColor;
+            border-bottom: 2px solid $labelColor;
+            rotate: 45deg;
         }
     }
     

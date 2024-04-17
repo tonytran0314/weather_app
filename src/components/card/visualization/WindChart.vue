@@ -2,7 +2,7 @@
 </script>
 
 <template>
-    <div id="wind_chart_container" class="row_item_body">
+    <div id="wind_chart_container" class="chart_item">
         <div id="compass_circle">
             <div id="north" class="direction">N</div>
             <div id="east" class="direction">E</div>
@@ -10,8 +10,7 @@
             <div id="west" class="direction">W</div>
 
             <div id="compass_center">
-                5
-                <br />
+                <span>5</span>
                 mph
             </div>
             <div id="wind_direction_arrow"></div>
@@ -29,8 +28,8 @@
         // padding: $baseDistance * 2;
 
         #compass_circle {
-            width: 120px;
-            height: 120px;
+            width: $baseDistance * 15;
+            height: $baseDistance * 15;
             // background-color: yellow;
             border: 2px solid $white;
             border-radius: 50%;
@@ -85,6 +84,7 @@
                 align-items: center;
                 text-align: center;
                 font-size: 0.9em;
+                flex-direction: column;
             }
             
 

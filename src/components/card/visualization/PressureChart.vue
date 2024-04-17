@@ -3,13 +3,12 @@
 </script>
 
 <template>
-    <div id="pressure_chart_container" class="row_item_body">
+    <div id="pressure_chart_container" class="chart_item">
         <div id="pressure_circle">
             <div id="current_pressure">
-                
+                <span>30.06</span>inHg
             </div>
             <div id="current_pressure_mark"></div>
-            <div id="center"></div>
         </div>
     </div>
 </template>
@@ -17,7 +16,7 @@
 <style lang="scss" scoped>
 
     @import "/src/assets/variables";
-    
+
     #pressure_chart_container {
         width: 100%;
         height: auto;
@@ -58,6 +57,14 @@
                 top: 50%;
                 transform: translate(-50%, -50%);
                 z-index: 2;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                span {
+                    font-size: 1.8em;
+                }
             }
 
             #current_pressure_mark {
@@ -72,16 +79,6 @@
                 z-index: 1;
             }
 
-            #center {
-                width: 5px;
-                height: 5px;
-                border-radius: 50%;
-                position: absolute;
-                background-color: aqua;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%);
-            }
         }
     }    
 </style>

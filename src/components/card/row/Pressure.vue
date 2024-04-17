@@ -1,5 +1,5 @@
 <script setup>
-    
+    import PressureChart from '../visualization/PressureChart.vue';
 </script>
 
 <template>
@@ -19,7 +19,7 @@
             <div class="title">PRESSURE</div>
         </div>
         <div id="pressure_body">
-            <div class="row_item_body">graph</div>
+            <PressureChart />
         </div>
     </div>
 </template>

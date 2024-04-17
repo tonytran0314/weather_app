@@ -40,7 +40,6 @@
         </div>
         <div class="row_item_body">
             <div id="sunrise_sunset_time">6:43AM</div>
-            <SunriseSunsetChart />
             <div id="sunrise_sunset_next">Sunset: 7:38PM</div>
         </div>
     </div>

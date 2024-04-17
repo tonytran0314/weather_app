@@ -1,5 +1,5 @@
 <script setup>
-    
+    import WindChart from '../visualization/WindChart.vue';
 </script>
 
 <template>
@@ -12,7 +12,7 @@
             </div>
             <div class="title">WIND</div>
         </div>
-        <div class="row_item_body">compass graph</div>
+        <WindChart />
     </div>
 </template>
 

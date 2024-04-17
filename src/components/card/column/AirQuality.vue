@@ -32,7 +32,7 @@
         gap: $baseDistance;
 
         #air_quality_overview {
-            font-size: 1.3em;
+            font-size: 2em;
         }
 
         #air_quality_body {

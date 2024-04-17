@@ -20,5 +20,7 @@
 </template>
 
 <style>
-    
+    #feels_like_value {
+        font-size: 2.5em;
+    }
 </style>

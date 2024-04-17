@@ -23,5 +23,7 @@
 </template>
 
 <style>
-    
+    #humidity_value {
+        font-size: 2.5em;
+    }
 </style>

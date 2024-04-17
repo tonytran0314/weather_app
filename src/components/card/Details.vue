@@ -68,6 +68,8 @@
         .row {
             display: flex;
             gap: $baseDistance;
+            height: 220px;
+            max-height: 220px;
 
             .row_item {
                 width: 50%;
@@ -75,6 +77,10 @@
                 .row_item_body {
                     display: flex;
                     flex-direction: column;
+                    justify-content: space-between;
+                    // background-color: teal;
+                    width: 100%;
+                    height: calc(100% - $baseDistance*3);
                 }
             }
         }

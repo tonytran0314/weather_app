@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div id="pressure_chart_container">
+    <div id="pressure_chart_container" class="row_item_body">
         <div id="pressure_circle">
             <div id="current_pressure">
                 
@@ -32,7 +32,7 @@
             // background-color: yellow;
             border-radius: 50%;
             border: 2px solid $white;
-            border-bottom: 1px dashed $mainBackgroundColor;
+            border-bottom: 1px solid $mainBackgroundColor;
             position: relative;
 
             &::before {

@@ -22,6 +22,14 @@
     </div>
 </template>
 
-<style>
+<style lang="scss" scoped>
+
+    #precipitation_value {
+        font-size: 2.5em;
+    }
+
+    #precipitation_period {
+        font-size: 1.2em;
+    }
     
 </style>

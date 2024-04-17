@@ -25,6 +25,16 @@
     </div>
 </template>
 
-<style>
+<style lang="scss" scoped>
+
+    @import "/src/assets/variables";
+
+    #uv_index_value {
+        font-size: 2.5em;
+    }
+
+    #uv_index_status {
+        font-size: 1.2em;
+    }
     
 </style>

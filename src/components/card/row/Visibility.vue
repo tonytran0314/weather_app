@@ -21,5 +21,7 @@
 </template>
 
 <style>
-    
+    #visibility_value {
+        font-size: 2.5em;
+    }
 </style>

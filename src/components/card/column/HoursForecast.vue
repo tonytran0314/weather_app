@@ -123,6 +123,7 @@
     #hours {
         display: flex;
         gap: $baseDistance * 2;
+        margin-bottom: $baseDistance * 2;
 
         .swiper_container {
             // swiper-slide width would be overflow (huge width), the below code would fix it.

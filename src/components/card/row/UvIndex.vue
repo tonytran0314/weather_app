@@ -1,5 +1,9 @@
 <script setup>
+    import { inject } from "vue";
+
     import Bar from "../visualization/Bar.vue";
+
+    const uv = inject('uv')
 </script>
 
 <template>
@@ -15,11 +19,11 @@
         </div>
         <div class="row_item_body">
             <div id="uv_index_overview">
-                <div id="uv_index_value">0</div>
+                <div id="uv_index_value">{{ uv }}</div>
                 <div id="uv_index_status">Low</div>
             </div>
             <Bar
-                value="1" />
+                :value="uv" />
             <div id="uv_index_description">Use sun protection <br /> 10AM-5PM</div>
         </div>
     </div>

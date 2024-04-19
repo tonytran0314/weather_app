@@ -1,5 +1,9 @@
 <script setup>
     import Bar from "../visualization/Bar.vue";
+
+    import { inject } from "vue";
+
+    const aqi = inject('aqi')
 </script>
 
 <template>
@@ -13,8 +17,8 @@
             <div class="title">AIR QUALITY</div>
         </div>
         <div id="air_quality_body">
-            <div id="air_quality_overview">37 - Good</div>
-            <div id="air_quality_description">Air quality index is 37, which is similar to yesterday at about this time</div>
+            <div id="air_quality_overview">{{ aqi }} - Good</div>
+            <div id="air_quality_description">Air quality index is {{ aqi }}, which is similar to yesterday at about this time</div>
             <Bar
                 type="aqi"
                 value="400" />

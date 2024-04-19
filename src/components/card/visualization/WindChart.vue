@@ -1,4 +1,10 @@
 <script setup>
+    import { inject, computed } from 'vue';
+    const windMph = inject('windMph')
+    const windDegree = inject('windDegree')
+    const degree = windDegree + 'deg'
+
+    console.log(degree.value)
 </script>
 
 <template>
@@ -10,7 +16,7 @@
             <div id="west" class="direction">W</div>
 
             <div id="compass_center">
-                <span>5</span>
+                <span>{{ windMph }}</span>
                 mph
             </div>
             <div id="wind_direction_arrow"></div>
@@ -78,7 +84,6 @@
                 top: 50%;
                 transform: translate(-50%, -50%);
                 z-index: 2;
-                // background-color: red;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -89,7 +94,7 @@
             
 
             #wind_direction_arrow {
-                rotate: -90deg; // PARAM 
+                rotate: 20deg; // PARAM 
 
                 width: 2px;
                 height: 80px;

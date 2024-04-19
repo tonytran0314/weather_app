@@ -1,8 +1,12 @@
 <script setup>
+    import { inject } from 'vue';
+
     // import function to register Swiper custom elements
     import { register } from 'swiper/element/bundle';
     // register Swiper custom elements
     register();
+
+    const hours = inject('hours')
 </script>
 
 <template>
@@ -32,70 +36,14 @@
             }" >
 
             <!-- START LOOP -->
-                <swiper-slide class="slide_item">
-                    <div class="time">Now</div>
+                <swiper-slide v-for="(hour, index) in hours" class="slide_item">
+                    <div class="time">{{ hour.time }}</div>
                     <div class="icon">
                         <img src="/src/assets/images/clear.png" />
                     </div>
-                    <div class="temperature">37°</div>
+                    <div class="temperature">{{ Math.round(hour.temp_f) }}°</div>
                 </swiper-slide>
             <!-- END LOOP -->
-                <swiper-slide class="slide_item">
-                    <div class="time">Now</div>
-                    <div class="icon">
-                        <img src="/src/assets/images/clear.png" />
-                    </div>
-                    <div class="temperature">37°</div>
-                </swiper-slide>
-                <swiper-slide class="slide_item">
-                    <div class="time">Now</div>
-                    <div class="icon">
-                        <img src="/src/assets/images/clear.png" />
-                    </div>
-                    <div class="temperature">37°</div>
-                </swiper-slide>
-                <swiper-slide class="slide_item">
-                    <div class="time">Now</div>
-                    <div class="icon">
-                        <img src="/src/assets/images/clear.png" />
-                    </div>
-                    <div class="temperature">37°</div>
-                </swiper-slide>
-                <swiper-slide class="slide_item">
-                    <div class="time">Now</div>
-                    <div class="icon">
-                        <img src="/src/assets/images/clear.png" />
-                    </div>
-                    <div class="temperature">37°</div>
-                </swiper-slide>
-                <swiper-slide class="slide_item">
-                    <div class="time">Now</div>
-                    <div class="icon">
-                        <img src="/src/assets/images/clear.png" />
-                    </div>
-                    <div class="temperature">37°</div>
-                </swiper-slide>
-                <swiper-slide class="slide_item">
-                    <div class="time">Now</div>
-                    <div class="icon">
-                        <img src="/src/assets/images/clear.png" />
-                    </div>
-                    <div class="temperature">37°</div>
-                </swiper-slide>
-                <swiper-slide class="slide_item">
-                    <div class="time">Now</div>
-                    <div class="icon">
-                        <img src="/src/assets/images/clear.png" />
-                    </div>
-                    <div class="temperature">37°</div>
-                </swiper-slide>
-                <swiper-slide class="slide_item">
-                    <div class="time">Now</div>
-                    <div class="icon">
-                        <img src="/src/assets/images/clear.png" />
-                    </div>
-                    <div class="temperature">37°</div>
-                </swiper-slide>
                 
         </swiper-container>
         

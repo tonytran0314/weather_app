@@ -1,5 +1,7 @@
 <script setup>
-    
+    import { inject } from 'vue';
+
+    const humidity = inject('humidity')
 </script>
 
 <template>
@@ -16,7 +18,7 @@
             <div class="title">HUMIDITY</div>
         </div>
         <div class="row_item_body">
-            <div id="humidity_value">62%</div>
+            <div id="humidity_value">{{ humidity }}%</div>
             <div id="humidity_description">The dew point is 34° right now</div>
         </div>
     </div>

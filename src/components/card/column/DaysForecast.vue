@@ -1,4 +1,7 @@
 <script setup>
+  import { inject } from 'vue';
+
+  const days = inject('days')
 </script>
 
 <template>
@@ -24,53 +27,18 @@
     </div>
     <div id="days_forecast">
       <!-- Start loop -->
-      <div class="days_forecast_item">
+      <div v-for="(day, index) in days" class="days_forecast_item">
         <div class="date">Today</div>
         <div class="day_weather_status_icon">
           <img src="/src/assets/images/clear.png" />
         </div>
         <div class="temperature_range">
-          <div class="day_highest_temperature">60°</div>
-          <div class="day_lowest_temperature">79°</div>
+          <div class="day_highest_temperature">{{ Math.round(day.day.maxtemp_f) }}°</div>
+          <div class="day_lowest_temperature">{{ Math.round(day.day.mintemp_f) }}°</div>
         </div>
       </div>
       <!-- End loop -->
 
-      <div class="days_forecast_item">
-        <div class="date">Today</div>
-        <div class="day_weather_status_icon">
-          <img src="/src/assets/images/clear.png" />
-        </div>
-        <div class="temperature_range">
-          <div class="day_highest_temperature">38°</div>
-          <div class="temperature_bar">bar</div>
-          <div class="day_lowest_temperature">57°</div>
-        </div>
-      </div>
-
-      <div class="days_forecast_item">
-        <div class="date">Today</div>
-        <div class="day_weather_status_icon">
-          <img src="/src/assets/images/clear.png" />
-        </div>
-        <div class="temperature_range">
-          <div class="day_highest_temperature">38°</div>
-          <div class="temperature_bar">bar</div>
-          <div class="day_lowest_temperature">57°</div>
-        </div>
-      </div>
-
-      <div class="days_forecast_item">
-        <div class="date">Today</div>
-        <div class="day_weather_status_icon">
-          <img src="/src/assets/images/clear.png" />
-        </div>
-        <div class="temperature_range">
-          <div class="day_highest_temperature">38°</div>
-          <div class="temperature_bar">bar</div>
-          <div class="day_lowest_temperature">57°</div>
-        </div>
-      </div>
     </div>
   </div>
 </template>

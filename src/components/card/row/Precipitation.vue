@@ -1,5 +1,7 @@
 <script setup>
-    
+    import { inject } from 'vue';
+
+    const precip = inject('precip')
 </script>
 
 <template>
@@ -14,7 +16,7 @@
         </div>
         <div class="row_item_body">
             <div id="precipitation_overview">
-                <div id="precipitation_value">0''</div>
+                <div id="precipitation_value">{{ precip }}''</div>
                 <div id="precipitation_period">in last 24h</div>
             </div>
             <div id="precipitation_description">Next expected is .55'' rain Thu</div>

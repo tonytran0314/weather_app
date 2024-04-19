@@ -1,5 +1,7 @@
 <script setup>
-    
+    import { inject } from 'vue';
+
+    const visibility = inject('visibility')
 </script>
 
 <template>
@@ -14,7 +16,7 @@
             <div class="title">VISIBILITY</div>
         </div>
         <div class="row_item_body">
-            <div id="visibility_value">19 mi</div>
+            <div id="visibility_value">{{ visibility }} mi</div>
             <div id="visibility_description">It's perfectly clear right now</div>
         </div>
     </div>

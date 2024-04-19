@@ -1,5 +1,7 @@
 <script setup>
-    
+    import { inject } from 'vue';
+
+    const feelsLike = inject('feelsLike')
 </script>
 
 <template>
@@ -13,7 +15,7 @@
             <div class="title">FEELS LIKE</div>
         </div>
         <div class="row_item_body">
-            <div id="feels_like_value">42°</div>
+            <div id="feels_like_value">{{ Math.round(feelsLike) }}°</div>
             <div id="feels_like_description">Wind is making it feel cooler</div>
         </div>
     </div>

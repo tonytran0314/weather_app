@@ -1,14 +1,20 @@
 <script setup>
-    
+    import { inject } from 'vue'
+
+    const city = inject('city')
+    const currentTemp = inject('currentTemp')
+    const condition = inject('condition')
+    const lowestTemp = inject('lowestTemp')
+    const highestTemp = inject('highestTemp')
 </script>
 
 <template>
     <div id="overview">
-        <div id="location">Lorton</div>
-        <div id="current_temperature">37°</div>
-        <div id="current_status">Mostly Clear</div>
+        <div id="location">{{ city }}</div>
+        <div id="current_temperature">{{ currentTemp }}°</div>
+        <div id="current_status">{{ condition }}</div>
         <div id="highest_and_lowest">
-            H:54° L:36°
+            H:{{ highestTemp }}° L:{{ lowestTemp }}°
         </div>
     </div>
 </template>

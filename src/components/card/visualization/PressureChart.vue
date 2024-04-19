@@ -1,12 +1,14 @@
 <script setup>
-    
+    import { inject } from 'vue';
+
+    const pressure = inject('pressure')
 </script>
 
 <template>
     <div id="pressure_chart_container" class="chart_item">
         <div id="pressure_circle">
             <div id="current_pressure">
-                <span>30.06</span>inHg
+                <span>{{ pressure }}</span>inHg
             </div>
             <div id="current_pressure_mark"></div>
         </div>

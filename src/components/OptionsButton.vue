@@ -26,7 +26,7 @@
     #options {
       position: absolute;
       top: -$baseDistance * 5;
-      right: $baseDistance * 2;
+      right: $baseDistance;
       cursor: pointer;
     }
 </style>

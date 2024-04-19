@@ -5,12 +5,16 @@
 </script>
 
 <template>
-  <div id="weather_container">
-    
+
+  <div id="option_button">
     <OptionsButton />
+  </div>
+
+  <div id="weather_container">
 
     <!-- display this -->
     <WeatherCard />
+
     <!-- or this -->
     <!-- <WeatherListAndSearch /> -->
 
@@ -21,12 +25,15 @@
 
   @import './assets/variables';
 
+  #option_button {
+    position: relative;
+  }
+
   #weather_container {
     width: $baseDistance * 60;
     height: 80vh;
     background-color: $cardContainerBackgroundColor;
     border-radius: $baseDistance * 3;
-    position: relative;
     color: $white;
     overflow-x: hidden;
     overflow-y: scroll;

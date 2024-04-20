@@ -6,7 +6,7 @@
     import Details from './Details.vue'
 
     // should merge them to 1 object
-    const city = ref('Fairfax')
+    const city = ref('Manassas')
     const currentTemp = ref('')
     const condition = ref('')
     const lowestTemp = ref('')
@@ -51,7 +51,6 @@
             .catch((error) => console.log(error))
     }
 
-
     onMounted(() => {
         getForecast()
     })
@@ -77,6 +76,7 @@
     provide('pressure',     pressure)       // Pressure
     
     provide('isDay',        isDay)          // Is day
+    
 </script>
 
 <template>

@@ -1,7 +1,24 @@
 <script setup>
-    import { inject } from 'vue';
+    import { ref, inject, watchEffect } from 'vue';
 
+    const currentTemp = inject('currentTemp')
     const feelsLike = inject('feelsLike')
+    const feelsLikeDescription = ref('')
+    const colderDescription = "Wind is making it feel cooler"
+    const hotterDescription = "Humidity is making it feel hotter"
+    const sameTempDescription = "Feels like the current temperature"
+
+    watchEffect(() => {
+        feelsLikeDescription.value = sameTempDescription
+
+        if(Math.round(feelsLike.value) < Math.round(currentTemp.value)) {
+            feelsLikeDescription.value = colderDescription
+        }
+
+        if(Math.round(feelsLike.value) > Math.round(currentTemp.value)) {
+            feelsLikeDescription.value = hotterDescription
+        }
+    })
 </script>
 
 <template>
@@ -15,8 +32,12 @@
             <div class="title">FEELS LIKE</div>
         </div>
         <div class="row_item_body">
-            <div id="feels_like_value">{{ Math.round(feelsLike) }}°</div>
-            <div id="feels_like_description">Wind is making it feel cooler</div>
+            <div id="feels_like_value">
+                {{ Math.round(feelsLike) }}°
+            </div>
+            <div id="feels_like_description">
+                {{ feelsLikeDescription }}
+            </div>
         </div>
     </div>
 </template>

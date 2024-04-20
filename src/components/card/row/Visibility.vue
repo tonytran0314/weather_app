@@ -1,7 +1,19 @@
 <script setup>
-    import { inject } from 'vue';
+    import { ref, inject, watchEffect } from 'vue';
 
+    const LIMITED_VISIBILITY = 2;
     const visibility = inject('visibility')
+    const visibilityDescription = ref('')
+    const clearVisibility = "It's perfectly clear right now"
+    const limitedVisibility = "The current visibility is shorter"
+
+    watchEffect(() => {
+        visibilityDescription.value = clearVisibility
+
+        if(visibility.value <= LIMITED_VISIBILITY) {
+            visibilityDescription.value = limitedVisibility
+        }
+    })
 </script>
 
 <template>
@@ -16,8 +28,12 @@
             <div class="title">VISIBILITY</div>
         </div>
         <div class="row_item_body">
-            <div id="visibility_value">{{ visibility }} mi</div>
-            <div id="visibility_description">It's perfectly clear right now</div>
+            <div id="visibility_value">
+                {{ visibility }} mi
+            </div>
+            <div id="visibility_description">
+                {{ visibilityDescription }}
+            </div>
         </div>
     </div>
 </template>

@@ -1,5 +1,5 @@
 <script setup>
-    import { inject, ref } from "vue";
+    import { inject, ref, watch, watchEffect } from "vue";
     import Bar from "../visualization/Bar.vue";
 
     const ALERTED_UV = 4;
@@ -7,48 +7,51 @@
 
     const isDay = inject('isDay')
     const hours = inject('hours')
-    const uvLabel = ref('')
     const uv = inject('uv')
+    const uvLabel = ref('')
+    const uvDescription = ref('')
 
-    if(uv.value >= 0 && uv.value <= 2) {
-        uvLabel.value = "Low"
-    } 
-    if(uv.value >= 3 && uv.value <= 5) {
-        uvLabel.value = "Moderate"
-    } 
-    if(uv.value >= 6 && uv.value <= 7) {
-        uvLabel.value = "High"
-    } 
-    if(uv.value >= 8 && uv.value <= 10) {
-        uvLabel.value = "Very High"
-    } 
-    if(uv.value >= 11) {
-        uvLabel.value = "Extreme"
-    } 
 
-    for (let i in hours.value) {
-        if(hours.value[i].uv >= ALERTED_UV) {
-            sunProtectionPeriod.value.push(i)
+    watchEffect(() => {
+        if(uv.value >= 0 && uv.value < 3) {
+            uvLabel.value = "Low"
+        } 
+        if(uv.value >= 3 && uv.value < 6) {
+            uvLabel.value = "Moderate"
+        } 
+        if(uv.value >= 6 && uv.value < 8) {
+            uvLabel.value = "High"
+        } 
+        if(uv.value >= 8 && uv.value < 11) {
+            uvLabel.value = "Very High"
+        } 
+        if(uv.value >= 11) {
+            uvLabel.value = "Extreme"
+        } 
+
+
+        for (let i in hours.value) {
+            if(hours.value[i].uv >= ALERTED_UV) {
+                sunProtectionPeriod.value.push(i)
+            }
         }
-    }
-
-    const timeConverter = (time) => {
-        if(time > 12) {
-            time = time - 12
-            return time + ":00PM"
+        
+        const timeConverter = (time) => {
+            if(time > 12) {
+                time = time - 12
+                return time + ":00PM"
+            }
+            return time + ":00AM"
         }
-        return time + ":00AM"
-    }
 
-    const sunProtectionFrom = timeConverter(sunProtectionPeriod.value[0])
-    const sunProtectionTo = timeConverter(sunProtectionPeriod.value[sunProtectionPeriod.value.length - 1])
+        const sunProtectionFrom = timeConverter(sunProtectionPeriod.value[0])
+        const sunProtectionTo = timeConverter(sunProtectionPeriod.value[sunProtectionPeriod.value.length - 1])
 
-
-    const uvDayDescription = "Use sun protection from "+ sunProtectionFrom +" to " + sunProtectionTo
-    const uvNightDescription = "Low for the rest of the day"
-    const uvDescription = isDay.value === 1 ? uvDayDescription : uvNightDescription
-
-
+        let uvDayDescription = "Use sun protection from "+ sunProtectionFrom +" to " + sunProtectionTo
+        const uvNightDescription = "Low for the rest of the day"
+        
+        uvDescription.value = uvDayDescription
+    })
 </script>
 
 <template>
@@ -68,7 +71,7 @@
                 <div id="uv_index_status">{{ uvLabel }}</div>
             </div>
             <Bar :value="uv" />
-            <div id="uv_index_description">{{ uvDescription }}</div>
+            <div>{{ uvDescription }}</div>
         </div>
     </div>
 </template>

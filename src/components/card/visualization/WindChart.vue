@@ -1,7 +1,13 @@
 <script setup>
-    import { inject, computed } from 'vue';
+    import { ref, inject, watchEffect } from 'vue';
+
     const windMph = inject('windMph')
-    const windDegree = inject('windDegree')
+    const degree = inject('windDegree')
+    const windDegree = ref('')
+
+    watchEffect(() => {
+        windDegree.value = degree.value + 'deg'
+    })
 </script>
 
 <template>
@@ -91,7 +97,7 @@
             
 
             #wind_direction_arrow {
-                rotate: 20deg; // PARAM 
+                rotate: v-bind(windDegree); // PARAM 
 
                 width: 2px;
                 height: 80px;
@@ -105,6 +111,7 @@
 
                 // arrow tail (circle)
                 &::before {
+                    
                     content: '';
                     background-color: $white;
                     width: $baseDistance;

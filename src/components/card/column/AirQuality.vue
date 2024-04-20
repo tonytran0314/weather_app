@@ -1,26 +1,28 @@
 <script setup>
     import Bar from "../visualization/Bar.vue";
 
-    import { inject, ref  } from "vue";
+    import { inject, ref, watchEffect  } from "vue";
 
     const aqi = inject('aqi')
     const aqiLabel = ref('')
 
-    if (aqi.value >= 0 && aqi.value <= 50) {
-        aqiLabel.value = "Good"
-    } 
-    if (aqi.value >= 51 && aqi.value <= 100) {
-        aqiLabel.value = "Moderate"
-    } 
-    if (aqi.value >= 101 && aqi.value <= 200) {
-        aqiLabel.value = "Unhealthy"
-    } 
-    if (aqi.value >= 201 && aqi.value <= 300) {
-        aqiLabel.value = "Very Unhealthy"
-    } 
-    if (aqi.value >= 301 ) {
-        aqiLabel.value = "Hazardous"
-    } 
+    watchEffect(() => {
+        if (aqi.value >= 0 && aqi.value < 51) {
+            aqiLabel.value = "Good"
+        } 
+        if (aqi.value >= 51 && aqi.value < 101) {
+            aqiLabel.value = "Moderate"
+        } 
+        if (aqi.value >= 101 && aqi.value < 201) {
+            aqiLabel.value = "Unhealthy"
+        } 
+        if (aqi.value >= 201 && aqi.value < 301) {
+            aqiLabel.value = "Very Unhealthy"
+        } 
+        if (aqi.value >= 301 ) {
+            aqiLabel.value = "Hazardous"
+        } 
+    })
 </script>
 
 <template>

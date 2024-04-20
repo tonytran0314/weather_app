@@ -1,9 +1,26 @@
 <script setup>
     import Bar from "../visualization/Bar.vue";
 
-    import { inject } from "vue";
+    import { inject, ref  } from "vue";
 
     const aqi = inject('aqi')
+    const aqiLabel = ref('')
+
+    if (aqi.value >= 0 && aqi.value <= 50) {
+        aqiLabel.value = "Good"
+    } 
+    if (aqi.value >= 51 && aqi.value <= 100) {
+        aqiLabel.value = "Moderate"
+    } 
+    if (aqi.value >= 101 && aqi.value <= 200) {
+        aqiLabel.value = "Unhealthy"
+    } 
+    if (aqi.value >= 201 && aqi.value <= 300) {
+        aqiLabel.value = "Very Unhealthy"
+    } 
+    if (aqi.value >= 301 ) {
+        aqiLabel.value = "Hazardous"
+    } 
 </script>
 
 <template>
@@ -17,11 +34,14 @@
             <div class="title">AIR QUALITY</div>
         </div>
         <div id="air_quality_body">
-            <div id="air_quality_overview">{{ aqi }} - Good</div>
-            <div id="air_quality_description">Air quality index is {{ aqi }}, which is similar to yesterday at about this time</div>
+            <div id="air_quality_overview">
+                {{ Math.round(aqi) }} - 
+                {{ aqiLabel }}
+            </div>
+            <div id="air_quality_description">Air quality index is {{ Math.round(aqi) }}, which is similar to yesterday at about this time</div>
             <Bar
                 type="aqi"
-                value="400" />
+                :value="aqi" />
         </div>
     </div>
 </template>

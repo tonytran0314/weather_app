@@ -6,7 +6,7 @@
     import Details from './Details.vue'
 
     // should merge them to 1 object
-    const city = ref('My Tho')
+    const city = ref('Fairfax')
     const currentTemp = ref('')
     const condition = ref('')
     const lowestTemp = ref('')
@@ -22,8 +22,9 @@
     const humidity = ref('')
     const visibility = ref('')
     const pressure = ref('')
+    const isDay = ref('')
 
-    const getForecastURL = "https://api.weatherapi.com/v1/forecast.json?key=00be241cf600489497b10236240604&q="+ city.value +"&days=5&aqi=yes&alerts=no";
+    const getForecastURL = "https://api.weatherapi.com/v1/forecast.json?key=00be241cf600489497b10236240604&q="+ city.value +"&days=3&aqi=yes&alerts=no";
 
 
     const getForecast = async () => {
@@ -45,6 +46,7 @@
                 humidity.value = res.data.current.humidity
                 visibility.value = res.data.current.vis_miles
                 pressure.value = res.data.current.pressure_in
+                isDay.value = res.data.current.is_day
             })
             .catch((error) => console.log(error))
     }
@@ -55,35 +57,26 @@
     })
 
     // Overview
-    provide('city', city)
-    provide('currentTemp', currentTemp)
-    provide('condition', condition)
-    provide('lowestTemp', lowestTemp)
-    provide('highestTemp', highestTemp)
+    provide('city',         city)
+    provide('currentTemp',  currentTemp)
+    provide('condition',    condition)
+    provide('lowestTemp',   lowestTemp)
+    provide('highestTemp',  highestTemp)
 
     // Detail 
-    // Hours
-    provide('hours', hours)
-    // Days
-    provide('days', days)
-    // AQI
-    provide('aqi', aqi)
-    // UV
-    provide('uv', uv)
-    // Wind mph
-    provide('windMph', windMph)
-    // Wind degree
-    provide('windDegree', windDegree)
-    // Feels like
-    provide('feelsLike', feelsLike)
-    // Precipitation
-    provide('precip', precip)
-    // Humidity
-    provide('humidity', humidity)
-    // Visibility
-    provide('visibility', visibility)
-    // Pressure
-    provide('pressure', pressure)
+    provide('hours',        hours)          // Hours
+    provide('days',         days)           // Days
+    provide('aqi',          aqi)            // AQI
+    provide('uv',           uv)             // UV
+    provide('windMph',      windMph)        // Wind mph
+    provide('windDegree',   windDegree)     // Wind degree
+    provide('feelsLike',    feelsLike)      // Feels like
+    provide('precip',       precip)         // Precipitation
+    provide('humidity',     humidity)       // Humidity
+    provide('visibility',   visibility)     // Visibility
+    provide('pressure',     pressure)       // Pressure
+    
+    provide('isDay',        isDay)          // Is day
 </script>
 
 <template>

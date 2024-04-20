@@ -2,9 +2,6 @@
     import { inject, computed } from 'vue';
     const windMph = inject('windMph')
     const windDegree = inject('windDegree')
-    const degree = windDegree + 'deg'
-
-    console.log(degree.value)
 </script>
 
 <template>

@@ -1,9 +1,54 @@
 <script setup>
-    import { inject } from "vue";
-
+    import { inject, ref } from "vue";
     import Bar from "../visualization/Bar.vue";
 
+    const ALERTED_UV = 4;
+    const sunProtectionPeriod = ref([])
+
+    const isDay = inject('isDay')
+    const hours = inject('hours')
+    const uvLabel = ref('')
     const uv = inject('uv')
+
+    if(uv.value >= 0 && uv.value <= 2) {
+        uvLabel.value = "Low"
+    } 
+    if(uv.value >= 3 && uv.value <= 5) {
+        uvLabel.value = "Moderate"
+    } 
+    if(uv.value >= 6 && uv.value <= 7) {
+        uvLabel.value = "High"
+    } 
+    if(uv.value >= 8 && uv.value <= 10) {
+        uvLabel.value = "Very High"
+    } 
+    if(uv.value >= 11) {
+        uvLabel.value = "Extreme"
+    } 
+
+    for (let i in hours.value) {
+        if(hours.value[i].uv >= ALERTED_UV) {
+            sunProtectionPeriod.value.push(i)
+        }
+    }
+
+    const timeConverter = (time) => {
+        if(time > 12) {
+            time = time - 12
+            return time + ":00PM"
+        }
+        return time + ":00AM"
+    }
+
+    const sunProtectionFrom = timeConverter(sunProtectionPeriod.value[0])
+    const sunProtectionTo = timeConverter(sunProtectionPeriod.value[sunProtectionPeriod.value.length - 1])
+
+
+    const uvDayDescription = "Use sun protection from "+ sunProtectionFrom +" to " + sunProtectionTo
+    const uvNightDescription = "Low for the rest of the day"
+    const uvDescription = isDay.value === 1 ? uvDayDescription : uvNightDescription
+
+
 </script>
 
 <template>
@@ -20,11 +65,10 @@
         <div class="row_item_body">
             <div id="uv_index_overview">
                 <div id="uv_index_value">{{ uv }}</div>
-                <div id="uv_index_status">Low</div>
+                <div id="uv_index_status">{{ uvLabel }}</div>
             </div>
-            <Bar
-                :value="uv" />
-            <div id="uv_index_description">Use sun protection <br /> 10AM-5PM</div>
+            <Bar :value="uv" />
+            <div id="uv_index_description">{{ uvDescription }}</div>
         </div>
     </div>
 </template>

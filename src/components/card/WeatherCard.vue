@@ -6,7 +6,7 @@
     import Details from './Details.vue'
 
     // should merge them to 1 object
-    const city = ref('Manassas')
+    const city = ref('Lorton')
     const currentTemp = ref('')
     const condition = ref('')
     const lowestTemp = ref('')

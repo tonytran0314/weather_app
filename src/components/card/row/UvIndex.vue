@@ -50,7 +50,8 @@
         let uvDayDescription = "Use sun protection from "+ sunProtectionFrom +" to " + sunProtectionTo
         const uvNightDescription = "Low for the rest of the day"
         
-        uvDescription.value = uvDayDescription
+        
+        uvDescription.value = isDay == '1' ? uvDayDescription : uvNightDescription
     })
 </script>
 

@@ -1,12 +1,39 @@
 <script setup>
-    import { inject } from 'vue';
+    import { ref, inject, watchEffect } from 'vue';
 
     // import function to register Swiper custom elements
     import { register } from 'swiper/element/bundle';
     // register Swiper custom elements
     register();
 
-    const hours = inject('hours')
+    const hoursObject = inject('hours')
+    const hours = hoursObject.value
+    let time = ref('')
+    let hoursOnly = ref([])
+    
+    const timeProcessor = (time) => {
+        time = parseInt(time.slice(11,13))
+
+        if(time == 0) { return '12AM' }
+        if(time == 12) { return '12PM' }
+
+        // for AM time
+        if(time > 0 && time < 12) {
+            return time + 'AM'
+        }
+
+        // for PM time
+        if(time > 12 && time <=23) {
+            return (time - 12) + 'PM'
+        }
+    }
+
+    watchEffect(() => {
+        console.log(hours)
+        // for(hour in hours.value) {
+        //     console.log(hour)
+        // }
+    })
 </script>
 
 <template>
@@ -37,7 +64,7 @@
 
             <!-- START LOOP -->
                 <swiper-slide v-for="(hour, index) in hours" class="slide_item">
-                    <div class="time">{{ hour.time }}</div>
+                    <div class="time">{{ timeProcessor(hour.time) }}</div>
                     <div class="icon">
                         <img src="/src/assets/images/clear.png" />
                     </div>

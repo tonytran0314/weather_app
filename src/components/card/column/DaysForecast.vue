@@ -2,6 +2,10 @@
   import { inject } from 'vue';
 
   const days = inject('days')
+  
+  const date = new Date()
+  const currentDay = date.getDay()
+  const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 </script>
 
 <template>
@@ -28,9 +32,10 @@
     <div id="days_forecast">
       <!-- Start loop -->
       <div v-for="(day, index) in days" class="days_forecast_item">
-        <div class="date">Today</div>
+        <div class="date">{{ DAYS[currentDay+index] }}</div>
         <div class="day_weather_status_icon">
-          <img src="/src/assets/images/clear.png" />
+          <img :src="day.day.condition.icon" />
+          <!-- <img src="/src/assets/images/clear.png" /> -->
         </div>
         <div class="temperature_range">
           <div class="day_highest_temperature">{{ Math.round(day.day.maxtemp_f) }}°</div>

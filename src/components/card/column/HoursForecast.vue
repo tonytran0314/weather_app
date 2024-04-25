@@ -5,14 +5,11 @@
     import { register } from 'swiper/element/bundle';
     // register Swiper custom elements
     register();
-
-    const hoursObject = inject('hours')
-    const hours = hoursObject.value
-    let time = ref('')
-    let hoursOnly = ref([])
+ 
+    const hours = inject('hours')
     
     const timeProcessor = (time) => {
-        time = parseInt(time.slice(11,13))
+        time = parseInt(time.slice(11,13)) 
 
         if(time == 0) { return '12AM' }
         if(time == 12) { return '12PM' }
@@ -66,7 +63,8 @@
                 <swiper-slide v-for="(hour, index) in hours" class="slide_item">
                     <div class="time">{{ timeProcessor(hour.time) }}</div>
                     <div class="icon">
-                        <img src="/src/assets/images/clear.png" />
+                        <img :src="hour.condition.icon" />
+                        <!-- <img src="/src/assets/images/clear.png" /> -->
                     </div>
                     <div class="temperature">{{ Math.round(hour.temp_f) }}°</div>
                 </swiper-slide>

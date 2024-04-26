@@ -7,7 +7,7 @@
   import { ref, onMounted, provide } from 'vue'
 
   // should merge them to 1 object
-  const city = ref('Fairfax')
+  const city = ref('Ho Chi Minh')
   const localTime = ref('')
   const currentTemp = ref('')
   const condition = ref('')

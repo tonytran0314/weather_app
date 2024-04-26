@@ -51,7 +51,7 @@
         const uvNightDescription = "Low for the rest of the day"
         
         
-        uvDescription.value = isDay == '1' ? uvDayDescription : uvNightDescription
+        uvDescription.value = isDay.value == '1' ? uvDayDescription : uvNightDescription
     })
 </script>
 

@@ -7,7 +7,7 @@
   import { ref, onMounted, provide } from 'vue'
 
   // should merge them to 1 object
-  const city = ref('My Tho')
+  const city = ref('Fairfax')
   const localTime = ref('')
   const currentTemp = ref('')
   const condition = ref('')
@@ -28,7 +28,6 @@
   const tomorrowHours = ref([])
 
   const backgroundColor = ref('')
-  backgroundColor.value = isDay.value == 0 ? 'rgb(76, 130, 183)' : 'rgb(14, 23, 39)'
 
   const getForecastURL = "https://api.weatherapi.com/v1/forecast.json?key=00be241cf600489497b10236240604&q="+ city.value +"&days=3&aqi=yes&alerts=no";
 
@@ -55,12 +54,14 @@
               pressure.value = res.data.current.pressure_in
               isDay.value = res.data.current.is_day
               tomorrowHours.value = res.data.forecast.forecastday[1].hour
+              
+              backgroundColor.value = isDay.value == 1 ? 'rgb(76, 130, 183)' : 'rgb(14, 23, 39)'
           })
           .catch((error) => console.log(error))
   }
 
   onMounted(() => {
-      getForecast()
+    getForecast()
   })
 
   // Overview

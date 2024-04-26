@@ -40,14 +40,17 @@
 
     watchEffect(() => {
         // forecastday[0] = today
+        // add today hours to the hours array
         for(let hourIndex = 0; hourIndex < todayHours.value.length; hourIndex++) {
             if(hourIndex >= currentHour) {
                 hours.value.push(todayHours.value[hourIndex])
+                console.log(hours.value[0].chance_of_snow)
             }
         }
 
         
         // forecastday[1] = tomorrow
+        // add tomorrow hours to the hours array
         for(let hourIndex = 0; hourIndex < tomorrowHours.value.length; hourIndex++) {
             if(hourIndex <= currentHour) {
                 hours.value.push(tomorrowHours.value[hourIndex])
@@ -84,10 +87,15 @@
             }" >
 
             <!-- START LOOP -->
-                <swiper-slide v-for="(hour, index) in hours" class="slide_item">
+                <swiper-slide 
+                    v-for="(hour, index) in hours" 
+                    class="slide_item"
+                    :class="{ without_percent: hour.will_it_rain == 0 && hour.will_it_snow == 0 }">
                     <div class="time">{{ to12HourTime(hour.time) }}</div>
                     <div class="icon">
                         <img :src="hour.condition.icon" />
+                        <span v-if="hour.will_it_snow == 1">{{ hour.chance_of_snow }}%</span>
+                        <span v-else-if="hour.will_it_rain == 1">{{ hour.chance_of_rain }}%</span>
                     </div>
                     <div class="temperature">{{ Math.round(hour.temp_f) }}°</div>
                 </swiper-slide>
@@ -117,9 +125,12 @@
     @import '/src/assets/variables';
 
     #hours {
+        background-color: $mainOpacityBackgroundColor;
+        padding: $baseDistance*2 0;
         display: flex;
         gap: $baseDistance * 2;
         margin-bottom: $baseDistance * 2;
+        border-radius: $baseDistance;
 
         .swiper_container {
             // swiper-slide width would be overflow (huge width), the below code would fix it.
@@ -130,23 +141,42 @@
             min-width: 0;
 
             .slide_item {
+                height: 112px;
+                max-height: 112px;
                 display: flex;
                 flex-direction: column;
                 text-align: center;
-                gap: $baseDistance * 1.5;
+                gap: $baseDistance * 1.4;
 
                 .icon {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    gap: calc($baseDistance / 2);
+
                     img {
                         width: $baseDistance * 4;
                     }
+
+                    span {
+                        font-size: 0.75em;
+                    }
                 }
+            }
+
+            .without_percent {
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+                gap: $baseDistance * 2.5;
             }
         }
 
         .prev_arrow, .next_arrow{
             cursor: pointer;
             border: none;
-            background-color: $cardContainerBackgroundColor;
+            background-color: $mainOpacityBackgroundColor;
         }
     }
 </style>

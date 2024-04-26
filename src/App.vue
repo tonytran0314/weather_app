@@ -32,7 +32,8 @@
   #weather_container {
     width: $baseDistance * 60;
     height: 80vh;
-    background-color: $cardContainerBackgroundColor;
+    background-color: #4C82B7;
+    // background-color: $cardContainerBackgroundColor;
     border-radius: $baseDistance * 3;
     color: $white;
     overflow-x: hidden;

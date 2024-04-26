@@ -1,12 +1,12 @@
 <script setup>
     import axios from 'axios'
-    import { ref, reactive, onMounted, provide } from 'vue'
+    import { ref, onMounted, provide } from 'vue'
 
     import Overview from './Overview.vue'
     import Details from './Details.vue'
 
     // should merge them to 1 object
-    const city = ref('My Tho')
+    const city = ref('Fairfax')
     const currentTemp = ref('')
     const condition = ref('')
     const lowestTemp = ref('')

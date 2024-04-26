@@ -32,7 +32,7 @@
     <div id="days_forecast">
       <!-- Start loop -->
       <div v-for="(day, index) in days" class="days_forecast_item">
-        <div class="date">{{ DAYS[currentDay+index] }}</div>
+        <div class="date">{{ DAYS[currentDay+index] || DAYS[currentDay+index-7] }}</div>
         <div class="day_weather_status_icon">
           <img :src="day.day.condition.icon" />
           <!-- <img src="/src/assets/images/clear.png" /> -->

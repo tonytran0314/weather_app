@@ -62,7 +62,7 @@
             height: $baseDistance * 15;
             border-radius: 50%;
             border: 2px solid $white;
-            border-bottom: 1px solid $mainBackgroundColor;
+            border-bottom: 1px solid $mainOpacityBackgroundColor;
             position: relative;
 
             &::before {
@@ -81,7 +81,6 @@
             #current_pressure {
                 width: $baseDistance * 12;
                 height: $baseDistance * 12;
-                background-color: $mainBackgroundColor;
                 position: absolute;
                 border-radius: 50%;
                 left: 50%;

@@ -35,7 +35,10 @@
         <div class="date">{{ DAYS[currentDay+index] || DAYS[currentDay+index-7] }}</div>
         <div class="day_weather_status_icon">
           <img :src="day.day.condition.icon" />
-          <!-- <img src="/src/assets/images/clear.png" /> -->
+          
+          <!-- Round to nearest tenth. Ex: 83 -> 80, 87 -> 90 -->
+          <span v-if="day.day.daily_will_it_snow == 1">{{ Math.round(day.day.daily_chance_of_snow/10)*10 }}%</span>
+          <span v-else-if="day.day.daily_will_it_rain == 1">{{ Math.round(day.day.daily_chance_of_rain/10)*10  }}%</span>
         </div>
         <div class="temperature_range">
           <div class="day_highest_temperature">{{ Math.round(day.day.maxtemp_f) }}°</div>
@@ -69,6 +72,10 @@
       padding-top: $baseDistance;
 
       .day_weather_status_icon {
+        display: flex;
+        align-items: center;
+        gap: $baseDistance;
+
         img {
           width: $baseDistance * 4;
         }

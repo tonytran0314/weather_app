@@ -34,12 +34,10 @@
     #wind_chart_container {
         width: 100%;
         height: auto;
-        // padding: $baseDistance * 2;
 
         #compass_circle {
             width: $baseDistance * 15;
             height: $baseDistance * 15;
-            // background-color: yellow;
             border: 2px solid $white;
             border-radius: 50%;
             position: relative;

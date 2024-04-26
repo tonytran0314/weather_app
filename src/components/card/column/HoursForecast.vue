@@ -93,8 +93,8 @@
                     <div class="time">{{ to12HourTime(hour.time) }}</div>
                     <div class="icon">
                         <img :src="hour.condition.icon" />
-                        <span v-if="hour.will_it_snow == 1">{{ hour.chance_of_snow }}%</span>
-                        <span v-else-if="hour.will_it_rain == 1">{{ hour.chance_of_rain }}%</span>
+                        <span v-if="hour.will_it_snow == 1">{{ Math.round(hour.chance_of_snow/10)*10 }}%</span>
+                        <span v-else-if="hour.will_it_rain == 1">{{ Math.round(hour.chance_of_rain/10)*10 }}%</span>
                     </div>
                     <div class="temperature">{{ Math.round(hour.temp_f) }}°</div>
                 </swiper-slide>

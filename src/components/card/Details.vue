@@ -78,7 +78,6 @@
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
-                    // background-color: teal;
                     width: 100%;
                     height: calc(100% - $baseDistance*3);
                 }
@@ -88,7 +87,6 @@
                     flex-direction: column;
                     justify-content: center;
                     align-items: center;
-                    // background-color: teal;
                     width: 100%;
                     height: calc(100% - $baseDistance*3);
                 }

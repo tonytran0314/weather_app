@@ -29,6 +29,7 @@
         }
     }
 
+    // FIND THE WAY TO DECLARE FUNCTION ONCE THEN USE IT EVERYWHERE
     // get hour in input time 
     // input example: '2024-04-25 14:00' => return 14
     const getHour = (time) => {

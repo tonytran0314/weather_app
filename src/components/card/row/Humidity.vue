@@ -1,7 +1,23 @@
 <script setup>
-    import { inject } from 'vue';
+    import { ref, inject, watchEffect } from 'vue';
+
+    // FIND THE WAY TO DECLARE FUNCTION ONCE THEN USE IT EVERYWHERE
+    // get hour in input time 
+    // input example: '2024-04-25 14:00' => return 14
+    const getHour = (time) => {
+        return parseInt(time.slice(11,13)) 
+    }
 
     const humidity = inject('humidity')
+    const hours = inject('hours')
+    const localTime = inject('localTime')
+    let currentHour = ref('')
+    let dewPoint = ref('')
+
+    watchEffect(() => {
+        currentHour = getHour(localTime.value)
+        dewPoint = Math.round(hours.value[currentHour]?.dewpoint_f)
+    })
 </script>
 
 <template>
@@ -19,7 +35,7 @@
         </div>
         <div class="row_item_body">
             <div id="humidity_value">{{ humidity }}%</div>
-            <div id="humidity_description">The dew point is 34° right now</div>
+            <div id="humidity_description">The dew point is {{ dewPoint }}° right now</div>
         </div>
     </div>
 </template>

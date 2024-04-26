@@ -7,12 +7,9 @@
     register();
 
     const hours = ref([])
+    const localTime = inject('localTime')
     const todayHours = inject('hours')
     const tomorrowHours = inject('tomorrowHours')
-    
-    // get current hour
-    const date = new Date()
-    let currentHour = date.getHours()
     
     // convert 24-hour time to 12-hour time
     const to12HourTime = (time) => {
@@ -38,24 +35,26 @@
         return parseInt(time.slice(11,13)) 
     }
 
+
     watchEffect(() => {
-        // forecastday[0] = today
+
+        // get current hour
+        let currentHour = getHour(localTime.value)
+        
         // add today hours to the hours array
         for(let hourIndex = 0; hourIndex < todayHours.value.length; hourIndex++) {
             if(hourIndex >= currentHour) {
                 hours.value.push(todayHours.value[hourIndex])
-                console.log(hours.value[0].chance_of_snow)
             }
         }
 
-        
-        // forecastday[1] = tomorrow
         // add tomorrow hours to the hours array
         for(let hourIndex = 0; hourIndex < tomorrowHours.value.length; hourIndex++) {
             if(hourIndex <= currentHour) {
                 hours.value.push(tomorrowHours.value[hourIndex])
             }
         }
+        
     })
     
 </script>

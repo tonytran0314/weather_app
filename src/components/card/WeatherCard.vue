@@ -6,7 +6,7 @@
     import Details from './Details.vue'
 
     // should merge them to 1 object
-    const city = ref('Lorton')
+    const city = ref('My Tho')
     const currentTemp = ref('')
     const condition = ref('')
     const lowestTemp = ref('')
@@ -23,6 +23,7 @@
     const visibility = ref('')
     const pressure = ref('')
     const isDay = ref('')
+    const tomorrowHours = ref([])
 
     const getForecastURL = "https://api.weatherapi.com/v1/forecast.json?key=00be241cf600489497b10236240604&q="+ city.value +"&days=3&aqi=yes&alerts=no";
 
@@ -47,6 +48,7 @@
                 visibility.value = res.data.current.vis_miles
                 pressure.value = res.data.current.pressure_in
                 isDay.value = res.data.current.is_day
+                tomorrowHours.value = res.data.forecast.forecastday[1].hour
             })
             .catch((error) => console.log(error))
     }
@@ -76,6 +78,7 @@
     provide('pressure',     pressure)       // Pressure
     
     provide('isDay',        isDay)          // Is day
+    provide('tomorrowHours',   tomorrowHours)
     
 </script>
 

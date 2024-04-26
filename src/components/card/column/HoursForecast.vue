@@ -5,11 +5,18 @@
     import { register } from 'swiper/element/bundle';
     // register Swiper custom elements
     register();
- 
-    const hours = inject('hours')
+
+    const hours = ref([])
+    const todayHours = inject('hours')
+    const tomorrowHours = inject('tomorrowHours')
     
-    const timeProcessor = (time) => {
-        time = parseInt(time.slice(11,13)) 
+    // get current hour
+    const date = new Date()
+    let currentHour = date.getHours()
+    
+    // convert 24-hour time to 12-hour time
+    const to12HourTime = (time) => {
+        time = getHour(time)
 
         if(time == 0) { return '12AM' }
         if(time == 12) { return '12PM' }
@@ -25,12 +32,29 @@
         }
     }
 
+    // get hour in input time 
+    // input example: '2024-04-25 14:00' => return 14
+    const getHour = (time) => {
+        return parseInt(time.slice(11,13)) 
+    }
+
     watchEffect(() => {
-        console.log(hours)
-        // for(hour in hours.value) {
-        //     console.log(hour)
-        // }
+        // forecastday[0] = today
+        for(let hourIndex = 0; hourIndex < todayHours.value.length; hourIndex++) {
+            if(hourIndex >= currentHour) {
+                hours.value.push(todayHours.value[hourIndex])
+            }
+        }
+
+        
+        // forecastday[1] = tomorrow
+        for(let hourIndex = 0; hourIndex < tomorrowHours.value.length; hourIndex++) {
+            if(hourIndex <= currentHour) {
+                hours.value.push(tomorrowHours.value[hourIndex])
+            }
+        }
     })
+    
 </script>
 
 <template>
@@ -61,10 +85,9 @@
 
             <!-- START LOOP -->
                 <swiper-slide v-for="(hour, index) in hours" class="slide_item">
-                    <div class="time">{{ timeProcessor(hour.time) }}</div>
+                    <div class="time">{{ to12HourTime(hour.time) }}</div>
                     <div class="icon">
                         <img :src="hour.condition.icon" />
-                        <!-- <img src="/src/assets/images/clear.png" /> -->
                     </div>
                     <div class="temperature">{{ Math.round(hour.temp_f) }}°</div>
                 </swiper-slide>

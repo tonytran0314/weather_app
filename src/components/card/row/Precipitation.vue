@@ -1,7 +1,53 @@
 <script setup>
-    import { inject } from 'vue';
+    import { inject, ref, watchEffect } from 'vue';
 
     const precip = inject('precip')
+    const days = inject('days')
+    // 3 should be a variable
+    const NONE_EXPECTED = "None expected in next 3 days"
+
+    let precipDescription = ref('')
+
+    watchEffect(() => {
+        const getNextExpectedPrecip = () => {
+            // loops through days
+            for(let dayIndex = 0; dayIndex < days.value.length; dayIndex++) {
+
+                // loop through hours of each day
+                for(let hourIndex = 0; hourIndex < days.value[dayIndex].hour.length; hourIndex++) {
+
+                    // if precip > 0, get it
+                    if(days.value[dayIndex].hour[hourIndex].precip_in > 0) {
+                        const precipValue = days.value[dayIndex].hour[hourIndex].precip_in
+                        return {
+                            "day": getDayFromDate(days.value[dayIndex].date),
+                            "value": precipValue
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        const getDayFromDate = (dateInput) => {
+            const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+            const date = new Date(dateInput)
+            return DAYS[date.getDay()]
+        }
+
+        const assignDescription = () => {
+            if(nextExpectedPrecip == null) {
+                return NONE_EXPECTED
+            }
+            return "Next expected is " + nextExpectedPrecip.value + "'' rain " + nextExpectedPrecip.day
+        }
+
+        
+        const nextExpectedPrecip = getNextExpectedPrecip()
+        precipDescription.value = assignDescription()
+
+
+    })
 </script>
 
 <template>
@@ -19,7 +65,7 @@
                 <div id="precipitation_value">{{ precip }}''</div>
                 <div id="precipitation_period">in last 24h</div>
             </div>
-            <div id="precipitation_description">Next expected is .55'' rain Thu</div>
+            <div id="precipitation_description">{{ precipDescription }}</div>
         </div>
     </div>
 </template>

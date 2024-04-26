@@ -7,7 +7,8 @@
   import { ref, onMounted, provide } from 'vue'
 
   // should merge them to 1 object
-  const city = ref('Paris')
+  const search = ref('Fairfax')
+  const location = ref('')
   const localTime = ref('')
   const currentTemp = ref('')
   const condition = ref('')
@@ -29,13 +30,15 @@
 
   const backgroundColor = ref('')
 
-  const getForecastURL = "https://api.weatherapi.com/v1/forecast.json?key=00be241cf600489497b10236240604&q="+ city.value +"&days=3&aqi=yes&alerts=no";
+  // separate: url, version, endpoint, search, days, aqi, alerts, *** api_key should be stored in .env file 
+  const getForecastURL = "https://api.weatherapi.com/v1/forecast.json?key=00be241cf600489497b10236240604&q="+ search.value +"&days=3&aqi=yes&alerts=yes";
 
 
   const getForecast = async () => {
       await axios
           .get(getForecastURL)
           .then((res) => {
+              location.value = res.data.location.name
               localTime.value = res.data.location.localtime
               currentTemp.value = Math.round(res.data.current.temp_f)
               condition.value = res.data.current.condition.text
@@ -65,7 +68,7 @@
   })
 
   // Overview
-  provide('city',             city)
+  provide('location',         location)
   provide('currentTemp',      currentTemp)
   provide('condition',        condition)
   provide('lowestTemp',       lowestTemp)

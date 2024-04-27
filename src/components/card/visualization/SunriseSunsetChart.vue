@@ -40,6 +40,8 @@
             }
 
             #time_overlay_bar {
+                rotate: 0deg; // PARAM
+
                 width: 2px;
                 height: 100px;
                 position: absolute;
@@ -47,7 +49,6 @@
                 left: 50%;
                 transform: translate(-50%, -50%);
                 transform-origin: 0 0;
-                rotate: -130deg;
 
                 #time_value {
                     width: 12px;

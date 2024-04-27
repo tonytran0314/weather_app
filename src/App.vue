@@ -64,8 +64,8 @@
               // loop through from today to the next days, add sunrise and sunset time to an array
               // today and tomorrow only
               for(let dayIndex = 0; dayIndex <= 1; dayIndex++) {
-                astro.value.push(days.value[dayIndex].date + ' ' + days.value[dayIndex].astro.sunrise)
-                astro.value.push(days.value[dayIndex].date + ' ' + days.value[dayIndex].astro.sunset)
+                astro.value.push(new Date(days.value[dayIndex].date + ' ' + days.value[dayIndex].astro.sunrise))
+                astro.value.push(new Date(days.value[dayIndex].date + ' ' + days.value[dayIndex].astro.sunset))
               }
           })
           .catch((error) => console.log(error))

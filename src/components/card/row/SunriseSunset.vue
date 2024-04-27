@@ -1,20 +1,86 @@
 <script setup>
-    import SunriseSunsetChart from '../visualization/SunriseSunsetChart.vue';
+
+    /* -------------------------------------------------------------------------- */
+    /*                       CODE WITH SUNRISE SUNSET CHART                       */
+    /* -------------------------------------------------------------------------- */
+
+    // import SunriseSunsetChart from '../visualization/SunriseSunsetChart.vue';
+    // import { ref, inject, watchEffect } from 'vue';
+
+    // const isDay = inject('isDay')
+    // const astro = inject('astro')
+    // const local = inject('localTime')
+    // const title = ref('')
+    // let nextSunriseOrSunsetTime = ref('')
+
+    // const toStandardDateTime = (string) => {
+    //     return new Date(string)
+    // }
+
+    // watchEffect(() => {
+    //     // title assignment
+    //     title.value = isDay.value == 1 ? 'Sunset' : 'Sunrise' 
+
+        
+    //     // convert 24-hour time to 12-hour time
+    //     const to12HourTime = (time) => {
+    //         const hour = time[0]
+    //         const minute = time[1]
+
+    //         if(hour == 0) { return '12:' + minute + 'AM' }
+    //         if(hour == 12) { return '12:' + minute + 'PM' }
+
+    //         // for AM time
+    //         if(hour > 0 && hour < 12) {
+    //             return hour + ':' + minute + 'AM'
+    //         }
+
+    //         // for PM time
+    //         if(hour > 12 && hour <=23) {
+    //             return (hour - 12) + ':' + minute + 'PM'
+    //         }
+    //     }
+
+    //     const localDateTime = toStandardDateTime(local.value)
+
+    //     const getNextSunriseOrSunsetTime = () => {
+    //         let time = []
+    //         for(let sunIndex = 0; sunIndex < astro.value.length; sunIndex++) {
+    //             astro.value[sunIndex] = toStandardDateTime(astro.value[sunIndex]) // element to standard date time element
+                
+    //             if(localDateTime < astro.value[sunIndex]) {
+    //                 time = [
+    //                     astro.value[sunIndex].getHours(),
+    //                     astro.value[sunIndex].getMinutes()
+    //                 ]
+    //                 return to12HourTime(time)
+    //             }
+    //         }
+    //     }
+
+    //     nextSunriseOrSunsetTime = getNextSunriseOrSunsetTime()
+    // })
+
+
     import { ref, inject, watchEffect } from 'vue';
 
     const isDay = inject('isDay')
-    const astro = inject('astro')
+    const astroArray = inject('astro')
     const local = inject('localTime')
-    const title = ref('')
-    let nextSunriseOrSunsetTime = ref('')
+    let todaySunTime = ref('')
+    let nextSunTime = ref('')
+    let astro = ref('')
 
-    const toStandardDateTime = (string) => {
-        return new Date(string)
-    }
 
     watchEffect(() => {
         // title assignment
-        title.value = isDay == 1 ? 'Sunset' : 'Sunrise' 
+        if(isDay.value == 1) {
+            todaySunTime.value = 'SUNSET'
+            nextSunTime.value = 'Sunrise'
+        } else {
+            todaySunTime.value = 'SUNRISE'
+            nextSunTime.value = 'Sunset'
+        }
 
         
         // convert 24-hour time to 12-hour time
@@ -32,37 +98,45 @@
 
             // for PM time
             if(hour > 12 && hour <=23) {
-                return (hour - 12) + ':' + minute + 'AM'
+                return (hour - 12) + ':' + minute + 'PM'
             }
         }
 
-        const localDateTime = toStandardDateTime(local.value)
+        const localDateTime = new Date(local.value)
 
-        const getNextSunriseOrSunsetTime = () => {
-            for(let sunIndex = 0; sunIndex < astro.value.length; sunIndex++) {
-                astro.value[sunIndex] = toStandardDateTime(astro.value[sunIndex]) // element to standard date time element
-                
-                let time = []
-
-                if(localDateTime < astro.value[0]) {
-                    time = [
-                        astro.value[0].getHours(),
-                        astro.value[0].getMinutes()
+        const getNextSunriseAndSunsetTime = () => {
+            let todayTime = []
+            let nextTime = []
+            for(let sunIndex = 0; sunIndex < astroArray.value.length; sunIndex++) {
+                if(localDateTime < astroArray.value[sunIndex]) {
+                    
+                    todayTime = [
+                        astroArray.value[sunIndex].getHours(),
+                        astroArray.value[sunIndex].getMinutes()
                     ]
-                    return to12HourTime(time)
-                }
 
-                if (localDateTime > astro.value[sunIndex] && localDateTime < astro.value[sunIndex + 1]) {
-                    time = [
-                        astro.value[sunIndex + 1].getHours(),
-                        astro.value[sunIndex + 1].getMinutes()
+                    nextTime = [
+                        astroArray.value[sunIndex + 1].getHours(),
+                        astroArray.value[sunIndex + 1].getMinutes()
                     ]
-                    return to12HourTime(time)
+
+                    let astroObject = {
+                        'today': {
+                            'title': todaySunTime.value,
+                            'time': to12HourTime(todayTime)
+                        },
+                        'next': {
+                            'title': nextSunTime.value,
+                            'time': to12HourTime(nextTime)
+                        }
+                    }
+                    return astroObject
+
                 }
             }
         }
 
-        nextSunriseOrSunsetTime = getNextSunriseOrSunsetTime()
+        astro = getNextSunriseAndSunsetTime()
     })
 </script>
 
@@ -104,16 +178,21 @@
             </svg>
 
             </div>
-            <div class="title">{{ title.toUpperCase() }}</div>
+            <div class="title">{{ astro?.today.title }}</div>
         </div>
         <div class="row_item_body">
-            <SunriseSunsetChart />
+            <!-- <SunriseSunsetChart /> -->
+            <div id="today_sunrise_sunset">{{ astro?.today.time }}</div>
 
-            <div id="sunrise_sunset_next">{{ title}}: {{ nextSunriseOrSunsetTime }}</div>
+            <div id="next_sunrise_sunset">Next {{ astro?.next.title }}: {{ astro?.next.time }}</div>
         </div>
     </div>
 </template>
 
-<style>
+<style lang="scss" scoped>
+
+    #today_sunrise_sunset {
+        font-size: 2.5em;
+    }
     
 </style>

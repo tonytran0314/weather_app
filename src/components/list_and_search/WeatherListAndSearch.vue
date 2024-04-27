@@ -28,11 +28,6 @@
         }
     ])
 
-    const addNewCity = () => {
-        // remember to validate 
-        // 1 city only add once
-        cities.value.push('3')
-    }
     // separate: url, version, endpoint, search, days, aqi, alerts, *** api_key should be stored in .env file 
     // or all of them store in .env file
     const url = 'https://api.weatherapi.com'
@@ -79,8 +74,7 @@
                     v-for="search in searchResults" 
                     :name="search.name"
                     :region="search.region"
-                    :country="search.country"
-                    @click="addNewCity" />
+                    :country="search.country" />
             </div>
         </div>
         <div id="list_container">

@@ -6,8 +6,13 @@
   import axios from 'axios'
   import { ref, onMounted, provide } from 'vue'
 
+
+  /* -------------------------------------------------------------------------- */
+  /*                                WEATHER CARD                                */
+  /* -------------------------------------------------------------------------- */
+
+
   // should merge them to 1 object
-  const search = ref('Fairfax')
   const location = ref('')
   const localTime = ref('')
   const currentTemp = ref('')
@@ -16,7 +21,6 @@
   const highestTemp = ref('')
   const hours = ref([])
   const days = ref([])
-  const aqi = ref('')
   const uv = ref('')
   const windMph = ref('')
   const windDegree = ref('')
@@ -32,7 +36,23 @@
   const backgroundColor = ref('')
 
   // separate: url, version, endpoint, search, days, aqi, alerts, *** api_key should be stored in .env file 
-  const getForecastURL = "https://api.weatherapi.com/v1/forecast.json?key=00be241cf600489497b10236240604&q="+ search.value +"&days=3&aqi=yes&alerts=yes";
+  const url = 'https://api.weatherapi.com'
+  const version = '/v1'
+  const endpoint = '/forecast.json'
+  const apiKey = '00be241cf600489497b10236240604'
+  const search = ref('Fairfax')
+  const forecastdays = 3
+  const aqi = 'no'
+  const alerts = 'yes'
+  const getForecastURL = 
+    url + 
+    version + 
+    endpoint + 
+    "?key=" + apiKey + 
+    "&q="+ search.value + 
+    "&days=" + forecastdays + 
+    "&aqi=" + aqi + 
+    "&alerts=" + alerts;
 
 
   const getForecast = async () => {
@@ -47,7 +67,6 @@
               highestTemp.value = Math.round(res.data.forecast.forecastday[0].day.maxtemp_f)
               hours.value = res.data.forecast.forecastday[0].hour
               days.value = res.data.forecast.forecastday
-              aqi.value = res.data.current.air_quality.co
               uv.value = res.data.current.uv
               windMph.value = res.data.current.wind_mph
               windDegree.value = res.data.current.wind_degree
@@ -85,7 +104,6 @@
   // Detail 
   provide('hours',            hours)          // Hours
   provide('days',             days)           // Days
-  provide('aqi',              aqi)            // AQI
   provide('uv',               uv)             // UV
   provide('windMph',          windMph)        // Wind mph
   provide('windDegree',       windDegree)     // Wind degree
@@ -99,22 +117,31 @@
   provide('tomorrowHours',    tomorrowHours)  // Tomorrow hours
   provide('localTime',        localTime)      // Local time
   provide('astro',            astro)          // Astro
-    
+  
+
+  /* -------------------------------------------------------------------------- */
+  /*                                OPTION BUTTON                               */
+  /* -------------------------------------------------------------------------- */
+
+  const showWeatherCard = ref(true)
+  const optionButtonClick = () => {
+    showWeatherCard.value = !showWeatherCard.value
+  }
 </script>
 
 <template>
 
-  <div id="option_button">
+  <div id="option_button" @click="optionButtonClick">
     <OptionsButton />
   </div>
 
   <div id="weather_container">
 
     <!-- display this -->
-    <WeatherCard />
+    <WeatherCard v-show="showWeatherCard" />
 
     <!-- or this -->
-    <!-- <WeatherListAndSearch /> -->
+    <WeatherListAndSearch v-show="!showWeatherCard" />
 
   </div>
 </template>

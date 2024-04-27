@@ -129,7 +129,7 @@
         padding: $baseDistance*2 0;
         display: flex;
         gap: $baseDistance * 2;
-        margin-bottom: $baseDistance * 2;
+        // margin-bottom: $baseDistance * 2;
         border-radius: $baseDistance;
 
         .swiper_container {

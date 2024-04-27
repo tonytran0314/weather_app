@@ -17,7 +17,7 @@
     <div id="details">
         <HoursForecast />
         <DaysForecase />
-        <AirQuality />
+        <!-- <AirQuality /> -->
 
         <div class="row">
             <UvIndex />

@@ -3,6 +3,7 @@
     import { ref, reactive, watchEffect } from 'vue';
     import axios from 'axios';
 
+    const emit = defineEmits(['newCity'])
     const props = defineProps({
         'name': {
             type: String
@@ -18,7 +19,7 @@
     // separate: url, version, endpoint, search, days, aqi, alerts, *** api_key should be stored in .env file 
     // or all of them store in .env file
     let summary = reactive({
-        city: null,
+        location: null,
         time: null,
         currentTemp: null,
         weatherStatus: null,
@@ -26,6 +27,7 @@
         lowTemp: null,
         isDay: null
     })
+
     const getWeatherSummary = async (city) => {
     
         const url = 'https://api.weatherapi.com'
@@ -48,7 +50,7 @@
         await axios
             .get(getWeatherSummaryURL)
             .then((res) => {
-                summary.city = res.data.location.name
+                summary.location = res.data.location.name
                 summary.time = res.data.location.localtime
                 summary.currentTemp = Math.round(res.data.current.temp_f)
 
@@ -57,28 +59,23 @@
                 summary.lowTemp = Math.round(res.data.forecast.forecastday[0].day.mintemp_f)
 
                 summary.isDay = res.data.current.is_day
-
-                console.log(summary)
             })
             .catch((error) => console.log(error))
     }
-    
-    const addNewCity = () => {
-        // remember to validate 
-        // 1 city only add once
-
-        // cities.value.push('3')
-
-        // hide search recommend
-        // searchRecommendDisplay.value = 'none'
-
         
-        getWeatherSummary(props.name)
+    const emitNewCity = () => {
+        emit('newCity', summary)
+        // console.log(summary)
     }
+
+    watchEffect(() => {
+        getWeatherSummary(props.name)
+    })
+    
 </script>
 
 <template>
-    <div class="search_item" @click="addNewCity">
+    <div class="search_item" @click="emitNewCity">
         <span v-show="name">{{ name }}</span>
         <span v-show="region">, {{ region }}</span>
         <span v-show="country">, {{ country }}</span>

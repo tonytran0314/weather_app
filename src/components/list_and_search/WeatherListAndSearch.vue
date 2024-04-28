@@ -13,21 +13,33 @@
         {
             'location': 'My Location',
             'time': 'Fairfax',
-            'current_temp': '60',
             'weather_status': 'Cloudy',
-            'high_temp': '70',
-            'low_temp': '50'
+            'current_temp': 60,
+            'high_temp': 70,
+            'low_temp': 50,
+            'is_day': 0
         },
         {
             'location': 'Fairfax',
             'time': '3:19 AM',
-            'current_temp': '60',
             'weather_status': 'Cloudy',
-            'high_temp': '70',
-            'low_temp': '50'
+            'current_temp': 60,
+            'high_temp': 70,
+            'low_temp': 50,
+            'is_day': 0
         }
     ])
 
+    const addNewCity = (summary) => {
+        // remember to validate 
+        // 1 city only add once
+
+        // hide search recommend when adding the city
+        // searchRecommendDisplay.value = 'none'
+        console.log(summary)
+    }
+
+    
     // separate: url, version, endpoint, search, days, aqi, alerts, *** api_key should be stored in .env file 
     // or all of them store in .env file
     const url = 'https://api.weatherapi.com'
@@ -58,8 +70,6 @@
             searchRecommendDisplay.value = 'block'
             getSearchResult()
         }
-
-
     })
 </script>
 
@@ -74,7 +84,8 @@
                     v-for="search in searchResults" 
                     :name="search.name"
                     :region="search.region"
-                    :country="search.country" />
+                    :country="search.country"
+                    @newCity="addNewCity" />
             </div>
         </div>
         <div id="list_container">

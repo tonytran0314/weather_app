@@ -7,16 +7,16 @@
             type: String
         },
         'current_temp': {
-            type: String
+            type: Number
         },
         'weather_status': {
             type: String
         },
         'high_temp': {
-            type: String
+            type: Number
         },
         'low_temp': {
-            type: String
+            type: Number
         },
     })
 </script>

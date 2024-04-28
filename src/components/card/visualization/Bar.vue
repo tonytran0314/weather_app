@@ -10,7 +10,6 @@
             type: String
         },
         value: {
-            type: String,
             required: true
         }
     })

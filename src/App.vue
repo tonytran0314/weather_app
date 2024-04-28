@@ -40,7 +40,7 @@
   const version = '/v1'
   const endpoint = '/forecast.json'
   const apiKey = '00be241cf600489497b10236240604'
-  const search = ref('Tan Son Nhat International Airport')
+  const search = ref('Fairfax')
   const forecastdays = 3
   const aqi = 'no'
   const alerts = 'yes'

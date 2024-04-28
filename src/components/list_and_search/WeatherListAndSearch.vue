@@ -12,34 +12,68 @@
     const cities = ref([
         {
             'location': 'My Location',
+            'region': 'Virginia',
+            'country': 'The US',
             'time': 'Fairfax',
-            'weather_status': 'Cloudy',
-            'current_temp': 60,
-            'high_temp': 70,
-            'low_temp': 50,
-            'is_day': 0
+            'weatherStatus': 'Cloudy',
+            'currentTemp': 60,
+            'highTemp': 70,
+            'lowTemp': 50,
+            'isDay': 0
         },
         {
-            'location': 'Fairfax',
-            'time': '3:19 AM',
-            'weather_status': 'Cloudy',
-            'current_temp': 60,
-            'high_temp': 70,
-            'low_temp': 50,
-            'is_day': 0
+            'location': 'My Tho',
+            'region': '',
+            'country': 'Vietnam',
+            'time': 'Fairfax',
+            'weatherStatus': 'Cloudy',
+            'currentTemp': 60,
+            'highTemp': 70,
+            'lowTemp': 50,
+            'isDay': 0
+        },
+        {
+            'location': 'Annandale',
+            'region': 'Virginia',
+            'country': 'The US',
+            'time': 'Fairfax',
+            'weatherStatus': 'Cloudy',
+            'currentTemp': 60,
+            'highTemp': 70,
+            'lowTemp': 50,
+            'isDay': 0
         }
     ])
 
     const addNewCity = (summary) => {
-        // remember to validate 
-        // 1 city only add once
+        if(newCityValidation(summary)) {
+            hideSearchRecommend()
 
-        // hide search recommend when adding the city
-        // searchRecommendDisplay.value = 'none'
-        console.log(summary)
+            // add new city
+            cities.value.push(summary)
+        }
     }
 
-    
+    const newCityValidation = (newCity) => {
+
+        for(let index = 0; index < cities.value.length; index++) {
+            if(
+                newCity.location === cities.value[index].location && // same location and
+                newCity.region === cities.value[index].region && // same region and
+                newCity.country === cities.value[index].country // same country
+            ) {
+                return false
+            }
+        } 
+
+        return true
+    }
+
+    const hideSearchRecommend = () => {
+        searchRecommendDisplay.value = 'none'
+    }
+
+
     // separate: url, version, endpoint, search, days, aqi, alerts, *** api_key should be stored in .env file 
     // or all of them store in .env file
     const url = 'https://api.weatherapi.com'
@@ -93,10 +127,10 @@
                 v-for="city in cities"
                 :location="city.location"
                 :time="city.time"
-                :current_temp="city.current_temp"
-                :weather_status="city.weather_status"
-                :high_temp="city.high_temp"
-                :low_temp="city.low_temp" />
+                :current_temp="city.currentTemp"
+                :weather_status="city.weatherStatus"
+                :high_temp="city.highTemp"
+                :low_temp="city.lowTemp" />
         </div>
     </div>
 </template>

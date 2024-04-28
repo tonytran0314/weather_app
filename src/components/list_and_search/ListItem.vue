@@ -61,7 +61,7 @@
         .item {
             background-color: $mainOpacityBackgroundColor;
             padding: $baseDistance * 2;
-            width: 100%;
+            width: $baseDistance * 52;
             display: flex;
             flex-direction: column;
             gap: $baseDistance * 4;

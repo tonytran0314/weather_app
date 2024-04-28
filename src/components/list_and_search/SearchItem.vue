@@ -20,6 +20,8 @@
     // or all of them store in .env file
     let summary = reactive({
         location: null,
+        region: null,
+        country: null,
         time: null,
         currentTemp: null,
         weatherStatus: null,
@@ -51,7 +53,9 @@
             .get(getWeatherSummaryURL)
             .then((res) => {
                 summary.location = res.data.location.name
-                summary.time = res.data.location.localtime
+                summary.region = res.data.location.region
+                summary.country = res.data.location.country
+                summary.time = getTime(res.data.location.localtime)
                 summary.currentTemp = Math.round(res.data.current.temp_f)
 
                 summary.weatherStatus = res.data.current.condition.text
@@ -65,7 +69,22 @@
         
     const emitNewCity = () => {
         emit('newCity', summary)
-        // console.log(summary)
+    }
+
+    const getTime = (dateTime) => {
+        dateTime = new Date(dateTime)
+        let suffix = 'AM'
+        let hour = dateTime.getHours()
+        const minute = dateTime.getMinutes()
+        let time = hour + ':' + minute + ' ' + suffix
+
+        // PM if hour >= 12
+        if(hour >= 12) {
+            hour -= 12
+            suffix = 'PM'
+        }
+
+        return time
     }
 
     watchEffect(() => {

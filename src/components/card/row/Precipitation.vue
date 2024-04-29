@@ -5,6 +5,7 @@
     const days = inject('days')
     // 3 should be a variable
     const NONE_EXPECTED = "None expected in next 3 days"
+    const PRECIPITATION_ALERT = 0.01
 
     let precipDescription = ref('')
 
@@ -17,7 +18,7 @@
                 for(let hourIndex = 0; hourIndex < days.value[dayIndex].hour.length; hourIndex++) {
 
                     // if precip > 0, get it
-                    if(days.value[dayIndex].hour[hourIndex].precip_in > 0) {
+                    if(days.value[dayIndex].hour[hourIndex].precip_in >= PRECIPITATION_ALERT) {
                         const precipValue = days.value[dayIndex].hour[hourIndex].precip_in
                         return {
                             "day": getDayFromDate(days.value[dayIndex].date),

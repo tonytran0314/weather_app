@@ -85,9 +85,11 @@
         
         // convert 24-hour time to 12-hour time
         const to12HourTime = (time) => {
-            const hour = time[0]
-            const minute = time[1]
+            let hour = time[0]
+            let minute = time[1]
 
+            if(minute == 0) { minute = '00' }
+            
             if(hour == 0) { return '12:' + minute + 'AM' }
             if(hour == 12) { return '12:' + minute + 'PM' }
 

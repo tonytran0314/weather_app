@@ -88,7 +88,7 @@
             let hour = time[0]
             let minute = time[1]
 
-            if(minute == 0) { minute = '00' }
+            if(minute < 10) { minute = '0' + minute }
             
             if(hour == 0) { return '12:' + minute + 'AM' }
             if(hour == 12) { return '12:' + minute + 'PM' }

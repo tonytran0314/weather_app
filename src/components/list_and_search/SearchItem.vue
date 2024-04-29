@@ -75,8 +75,11 @@
         dateTime = new Date(dateTime)
         let suffix = 'AM'
         let hour = dateTime.getHours()
-        const minute = dateTime.getMinutes()
+        let minute = dateTime.getMinutes()
         let time = hour + ':' + minute + ' ' + suffix
+
+        // for example: 7 to 07 if minute < 10
+        if(minute < 10) { minute = '0' + minute }
 
         // PM if hour >= 12
         if(hour >= 12) {

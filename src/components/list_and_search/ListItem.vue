@@ -40,7 +40,9 @@
                 <div class="high_low_temp">H:{{ high_temp }}° L:{{ low_temp }}°</div>
             </div>
         </div>
-        <div v-show="removable" class="remove">
+        <div 
+            v-show="removable" 
+            class="remove">
             <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M4 6H20L18.4199 20.2209C18.3074 21.2337 17.4512 22 16.4321 22H7.56786C6.54876 22 5.69264 21.2337 5.5801 20.2209L4 6Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M7.34491 3.14716C7.67506 2.44685 8.37973 2 9.15396 2H14.846C15.6203 2 16.3249 2.44685 16.6551 3.14716L18 6H6L7.34491 3.14716Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -64,7 +66,7 @@
         .item {
             background-color: $mainOpacityBackgroundColor;
             padding: $baseDistance * 2;
-            width: $baseDistance * 52;
+            width: 100%;
             display: flex;
             flex-direction: column;
             gap: $baseDistance * 4;
@@ -101,6 +103,14 @@
                 justify-content: space-between;
             }
         }
+
+        // .default_item {
+        //     width: 100%;
+        // }
+
+        // .removable_item {
+        //     width: $baseDistance * 52;
+        // }
 
         .remove {
             display: flex;

@@ -125,7 +125,8 @@
                 :current_temp="city.currentTemp"
                 :weather_status="city.weatherStatus"
                 :high_temp="city.highTemp"
-                :low_temp="city.lowTemp" />
+                :low_temp="city.lowTemp"
+                :removable="true" />
         </div>
     </div>
 </template>

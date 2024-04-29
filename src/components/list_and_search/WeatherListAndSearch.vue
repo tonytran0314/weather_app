@@ -9,48 +9,35 @@
     let searchResults = ref([])
     let searchRecommendDisplay = ref('none')
 
-    const cities = ref([
-        {
-            'location': 'My Location',
-            'region': 'Virginia',
-            'country': 'The US',
-            'time': 'Fairfax',
-            'weatherStatus': 'Cloudy',
-            'currentTemp': 60,
-            'highTemp': 70,
-            'lowTemp': 50,
-            'isDay': 0
-        },
-        {
-            'location': 'My Tho',
-            'region': '',
-            'country': 'Vietnam',
-            'time': 'Fairfax',
-            'weatherStatus': 'Cloudy',
-            'currentTemp': 60,
-            'highTemp': 70,
-            'lowTemp': 50,
-            'isDay': 0
-        },
-        {
-            'location': 'Annandale',
-            'region': 'Virginia',
-            'country': 'The US',
-            'time': 'Fairfax',
-            'weatherStatus': 'Cloudy',
-            'currentTemp': 60,
-            'highTemp': 70,
-            'lowTemp': 50,
-            'isDay': 0
-        }
-    ])
+    const myLocation = ref({
+        'location': 'My Location',
+        'region': 'Virginia',
+        'country': 'The US',
+        'time': 'Fairfax',
+        'weatherStatus': 'Cloudy',
+        'currentTemp': 60,
+        'highTemp': 70,
+        'lowTemp': 50,
+        'isDay': 0
+    })
+
+    // [1/2] empty localStorage.cities:
+    // const cities = ref([])
+
+    const cities = ref(JSON.parse(localStorage.cities))
 
     const addNewCity = (summary) => {
         if(newCityValidation(summary)) {
             hideSearchRecommend()
+        
+            // [2/2] empty localStorage.cities:
+            // localStorage.cities = JSON.stringify([])
 
             // add new city
             cities.value.push(summary)
+
+            // save to localstorage 
+            localStorage.cities = JSON.stringify(cities.value)
         }
     }
 
@@ -123,6 +110,14 @@
             </div>
         </div>
         <div id="list_container">
+            <ListItem 
+                :location="myLocation.location"
+                :time="myLocation.time"
+                :current_temp="myLocation.currentTemp"
+                :weather_status="myLocation.weatherStatus"
+                :high_temp="myLocation.highTemp"
+                :low_temp="myLocation.lowTemp"
+                :removable="false" />
             <ListItem 
                 v-for="city in cities"
                 :location="city.location"

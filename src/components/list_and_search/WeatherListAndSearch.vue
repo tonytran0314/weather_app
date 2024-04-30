@@ -5,6 +5,8 @@
     import axios from 'axios'
     import { ref, watchEffect } from 'vue';
 
+    const emit = defineEmits(['openedWeather'])
+
     const search = ref('')
     let searchResults = ref([])
     let searchRecommendDisplay = ref('none')
@@ -68,6 +70,10 @@
         localStorage.cities = JSON.stringify(cities.value)
     }
 
+    const openWeatherItem = (openedWeather) => {
+        emit('openedWeather', openedWeather)
+    }
+
 
     // separate: url, version, endpoint, search, days, aqi, alerts, *** api_key should be stored in .env file 
     // or all of them store in .env file
@@ -125,7 +131,8 @@
                 :weather_status="myLocation.weatherStatus"
                 :high_temp="myLocation.highTemp"
                 :low_temp="myLocation.lowTemp"
-                :removable="false" />
+                :removable="false"
+                @openedWeather="openWeatherItem" />
             <ListItem 
                 v-for="(city, index) in cities"
                 :location="city.location"
@@ -136,7 +143,8 @@
                 :low_temp="city.lowTemp"
                 :removable="true"
                 :index="index"
-                @removedIndex="removeWeatherItem" />
+                @removedIndex="removeWeatherItem"
+                @openedWeather="openWeatherItem" />
         </div>
     </div>
 </template>

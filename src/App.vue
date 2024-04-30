@@ -2,131 +2,33 @@
   import OptionsButton from './components/OptionsButton.vue';
   import WeatherCard from './components/card/WeatherCard.vue';
   import WeatherListAndSearch from './components/list_and_search/WeatherListAndSearch.vue';
-
-  import axios from 'axios'
-  import { ref, onMounted, provide } from 'vue'
-
-
-  /* -------------------------------------------------------------------------- */
-  /*                                WEATHER CARD                                */
-  /* -------------------------------------------------------------------------- */
-
-
-  // should merge them to 1 object
-  const location = ref('')
-  const localTime = ref('')
-  const currentTemp = ref('')
-  const condition = ref('')
-  const lowestTemp = ref('')
-  const highestTemp = ref('')
-  const hours = ref([])
-  const days = ref([])
-  const uv = ref('')
-  const windMph = ref('')
-  const windDegree = ref('')
-  const precip = ref('')
-  const feelsLike = ref('')
-  const humidity = ref('')
-  const visibility = ref('')
-  const pressure = ref('')
-  const isDay = ref('')
-  const tomorrowHours = ref([])
-  const astro = ref([])
+  
+  import { ref, watchEffect } from 'vue'
 
   const backgroundColor = ref('')
-
-  // separate: url, version, endpoint, search, days, aqi, alerts, *** api_key should be stored in .env file 
-  const url = 'https://api.weatherapi.com'
-  const version = '/v1'
-  const endpoint = '/forecast.json'
-  const apiKey = '00be241cf600489497b10236240604'
-  const search = ref('Fairfax')
-  const forecastdays = 3
-  const aqi = 'no'
-  const alerts = 'yes'
-  const getForecastURL = 
-    url + 
-    version + 
-    endpoint + 
-    "?key=" + apiKey + 
-    "&q="+ search.value + 
-    "&days=" + forecastdays + 
-    "&aqi=" + aqi + 
-    "&alerts=" + alerts;
-
-
-  const getForecast = async () => {
-      await axios
-          .get(getForecastURL)
-          .then((res) => {
-              location.value = res.data.location.name
-              localTime.value = res.data.location.localtime
-              currentTemp.value = Math.round(res.data.current.temp_f)
-              condition.value = res.data.current.condition.text
-              lowestTemp.value = Math.round(res.data.forecast.forecastday[0].day.mintemp_f)
-              highestTemp.value = Math.round(res.data.forecast.forecastday[0].day.maxtemp_f)
-              hours.value = res.data.forecast.forecastday[0].hour
-              days.value = res.data.forecast.forecastday
-              uv.value = res.data.current.uv
-              windMph.value = res.data.current.wind_mph
-              windDegree.value = res.data.current.wind_degree
-              feelsLike.value = res.data.current.feelslike_f
-              precip.value = res.data.current.precip_in
-              humidity.value = res.data.current.humidity
-              visibility.value = res.data.current.vis_miles
-              pressure.value = res.data.current.pressure_in
-              isDay.value = res.data.current.is_day
-              tomorrowHours.value = res.data.forecast.forecastday[1].hour
-              
-              backgroundColor.value = isDay.value == 1 ? 'rgb(76, 130, 183)' : 'rgb(14, 23, 39)'
-
-              // loop through from today to the next days, add sunrise and sunset time to an array
-              // today and tomorrow only
-              for(let dayIndex = 0; dayIndex <= 1; dayIndex++) {
-                astro.value.push(new Date(days.value[dayIndex].date + ' ' + days.value[dayIndex].astro.sunrise))
-                astro.value.push(new Date(days.value[dayIndex].date + ' ' + days.value[dayIndex].astro.sunset))
-              }
-          })
-          .catch((error) => console.log(error))
-  }
-
-  onMounted(() => {
-    getForecast()
-  })
-
-  // Overview
-  provide('location',         location)
-  provide('currentTemp',      currentTemp)
-  provide('condition',        condition)
-  provide('lowestTemp',       lowestTemp)
-  provide('highestTemp',      highestTemp)
-
-  // Detail 
-  provide('hours',            hours)          // Hours
-  provide('days',             days)           // Days
-  provide('uv',               uv)             // UV
-  provide('windMph',          windMph)        // Wind mph
-  provide('windDegree',       windDegree)     // Wind degree
-  provide('feelsLike',        feelsLike)      // Feels like
-  provide('precip',           precip)         // Precipitation
-  provide('humidity',         humidity)       // Humidity
-  provide('visibility',       visibility)     // Visibility
-  provide('pressure',         pressure)       // Pressure
-  
-  provide('isDay',            isDay)          // Is day
-  provide('tomorrowHours',    tomorrowHours)  // Tomorrow hours
-  provide('localTime',        localTime)      // Local time
-  provide('astro',            astro)          // Astro
-  
-
-  /* -------------------------------------------------------------------------- */
-  /*                                OPTION BUTTON                               */
-  /* -------------------------------------------------------------------------- */
-
   const showWeatherCard = ref(true)
+  const isDay = ref(0)
+
   const optionButtonClick = () => {
     showWeatherCard.value = !showWeatherCard.value
   }
+
+  const openWeatherItem = (openedWeather) => {
+    showWeatherCard.value = true
+    // search.value = openWeatherItem
+    // console.log(search.value)
+  }
+
+  const setIsDay = (isDayValue) => {
+    isDay.value = isDayValue
+  }
+   
+  watchEffect(() => {
+    backgroundColor.value = 
+      (isDay.value === 1 && showWeatherCard.value) ? 
+        'rgb(76, 130, 183)' : 
+        'rgb(14, 23, 39)'
+  })
 </script>
 
 <template>
@@ -138,17 +40,21 @@
   <div id="weather_container">
 
     <!-- display this -->
-    <WeatherCard v-show="showWeatherCard" />
+    <WeatherCard 
+      v-show="showWeatherCard"
+      @isDay="setIsDay" />
 
     <!-- or this -->
-    <WeatherListAndSearch v-show="!showWeatherCard" />
+    <WeatherListAndSearch
+      v-show="!showWeatherCard"
+      @openedWeather="openWeatherItem" />
 
   </div>
 </template>
 
 <style lang="scss" scoped>
 
-  @import './assets/variables';
+  @import '/src/assets/variables';
 
   #option_button {
     position: relative;

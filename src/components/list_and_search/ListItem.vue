@@ -26,16 +26,22 @@
         }
     })
 
-    const emit = defineEmits(['removedIndex'])
+    const emit = defineEmits(['removedIndex', 'openedWeather'])
 
     const removeWeatherItem = () => {
         emit('removedIndex', props.index)
+    }
+
+    const openWeatherItem = () => {
+        emit('openedWeather', props.location)
     }
 </script>
 
 <template>
     <div class="list_item_container">
-        <div class="item">
+        <div
+            @click="openWeatherItem"
+            class="item">
             <div class="top">
                 <div class="location">
                     <p>{{ location }}</p>

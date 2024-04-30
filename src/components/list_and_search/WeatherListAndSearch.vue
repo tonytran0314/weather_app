@@ -60,6 +60,14 @@
         searchRecommendDisplay.value = 'none'
     }
 
+    const removeWeatherItem = (removedIndex) => {
+        // remove 1 weather item
+        cities.value.splice(removedIndex, 1)
+
+        // save to localstorage 
+        localStorage.cities = JSON.stringify(cities.value)
+    }
+
 
     // separate: url, version, endpoint, search, days, aqi, alerts, *** api_key should be stored in .env file 
     // or all of them store in .env file
@@ -119,14 +127,16 @@
                 :low_temp="myLocation.lowTemp"
                 :removable="false" />
             <ListItem 
-                v-for="city in cities"
+                v-for="(city, index) in cities"
                 :location="city.location"
                 :time="city.time"
                 :current_temp="city.currentTemp"
                 :weather_status="city.weatherStatus"
                 :high_temp="city.highTemp"
                 :low_temp="city.lowTemp"
-                :removable="true" />
+                :removable="true"
+                :index="index"
+                @removedIndex="removeWeatherItem" />
         </div>
     </div>
 </template>

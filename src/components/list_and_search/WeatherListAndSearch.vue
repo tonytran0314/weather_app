@@ -3,7 +3,7 @@
     import SearchItem from './SearchItem.vue';
 
     import axios from 'axios'
-    import { ref, watchEffect } from 'vue';
+    import { onMounted, ref, watchEffect } from 'vue';
 
     const emit = defineEmits(['openedWeather'])
 
@@ -12,16 +12,34 @@
     let searchRecommendDisplay = ref('none')
 
     const myLocation = ref({
-        'location': 'My Location',
-        'region': 'Virginia',
-        'country': 'The US',
-        'time': 'Fairfax',
-        'weatherStatus': 'Cloudy',
-        'currentTemp': 60,
-        'highTemp': 70,
-        'lowTemp': 50,
-        'isDay': 0
+        location: 'My Location'
     })
+
+    const getMyLocationSummary = async (location) => {
+        const url = 'https://api.weatherapi.com'
+        const version = '/v1'
+        const endpoint = '/forecast.json'
+        const apiKey = '00be241cf600489497b10236240604'
+        const getMyLocationSummaryURL = 
+            url + 
+            version + 
+            endpoint + 
+            "?key=" + apiKey + 
+            "&q="+ location
+
+        await axios
+            .get(getMyLocationSummaryURL)
+            .then((res) => {
+                myLocation.value.time = res.data.location.name
+                myLocation.value.weatherStatus = res.data.current.condition.text
+                myLocation.value.currentTemp = Math.round(res.data.current.temp_f)
+                myLocation.value.highTemp = Math.round(res.data.forecast.forecastday[0].day.maxtemp_f)
+                myLocation.value.lowTemp = Math.round(res.data.forecast.forecastday[0].day.mintemp_f)
+                myLocation.value.isDay = res.data.current.is_day
+            })
+            .catch((error) => console.log(error))
+    }
+    
 
     // [1/2] empty localStorage.cities:
     // const cities = ref([])
@@ -83,6 +101,7 @@
     const apiKey = '00be241cf600489497b10236240604'
     
     watchEffect(() => {
+        getMyLocationSummary('Fairfax')
         const getSearchResultURL = 
             url + 
             version + 
@@ -131,6 +150,7 @@
                 :weather_status="myLocation.weatherStatus"
                 :high_temp="myLocation.highTemp"
                 :low_temp="myLocation.lowTemp"
+                :is_day="myLocation.isDay"
                 :removable="false"
                 @openedWeather="openWeatherItem" />
             <ListItem 
@@ -143,6 +163,7 @@
                 :low_temp="city.lowTemp"
                 :removable="true"
                 :index="index"
+                :is_day="city.isDay"
                 @removedIndex="removeWeatherItem"
                 @openedWeather="openWeatherItem" />
         </div>

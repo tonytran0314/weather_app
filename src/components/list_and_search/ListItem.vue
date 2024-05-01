@@ -1,4 +1,7 @@
 <script setup>
+
+    import { ref, watchEffect } from 'vue';
+
     const props = defineProps({
         'location': {
             type: String
@@ -23,10 +26,14 @@
         },
         'index': {
             type: Number
+        },
+        'is_day': {
+            type: Number
         }
     })
 
     const emit = defineEmits(['removedIndex', 'openedWeather'])
+    const backgroundColor = ref('')
 
     const removeWeatherItem = () => {
         emit('removedIndex', props.index)
@@ -35,6 +42,18 @@
     const openWeatherItem = () => {
         emit('openedWeather', props.location)
     }
+
+    const setBackgroundColor = () => {
+        backgroundColor.value = 
+        (props.is_day === 1) ? 
+            'rgb(76, 130, 183)' : 
+            'rgb(10, 15, 25)'
+    }
+
+    // this one looks optimize. apply for the others
+    watchEffect(() => {
+        setBackgroundColor()
+    })
 </script>
 
 <template>
@@ -81,7 +100,7 @@
         gap: $baseDistance * 1.5;
 
         .item {
-            background-color: $mainOpacityBackgroundColor;
+            background-color: v-bind(backgroundColor);
             padding: $baseDistance * 2;
             width: 100%;
             display: flex;

@@ -5,6 +5,12 @@
     import axios from 'axios'
     import { ref, onMounted, provide, watchEffect } from 'vue'
 
+    const props = defineProps({
+        location: {
+            type: String
+        }
+    })
+
     // let forecast = reactive({
     //     location: null,
     //     localTime: null,
@@ -127,7 +133,7 @@
     provide('astro',            astro)          // Astro
 
     watchEffect(() => {
-        getForecast('Fairfax')
+        getForecast(props.location)
         emit('isDay', isDay.value)
     })
 </script>

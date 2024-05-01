@@ -9,14 +9,19 @@
   const showWeatherCard = ref(true)
   const isDay = ref(0)
 
+  // default location when user's location not found
+  // const location = ref('Washington DC')
+
+  const currentLocation = ref('Fairfax')
+  const location = ref(currentLocation.value)
+
   const optionButtonClick = () => {
     showWeatherCard.value = !showWeatherCard.value
   }
 
   const openWeatherItem = (openedWeather) => {
     showWeatherCard.value = true
-    // search.value = openWeatherItem
-    // console.log(search.value)
+    location.value = (openedWeather === 'My Location') ? currentLocation.value : openedWeather
   }
 
   const setIsDay = (isDayValue) => {
@@ -42,6 +47,7 @@
     <!-- display this -->
     <WeatherCard 
       v-show="showWeatherCard"
+      :location="location"
       @isDay="setIsDay" />
 
     <!-- or this -->

@@ -50,6 +50,7 @@
         if(newCityValidation(summary)) {
             hideSearchRecommend()
             console.log(summary)
+            console.log(cities.value)
         
             // [2/2] empty localStorage.cities:
             // localStorage.cities = JSON.stringify([])

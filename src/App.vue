@@ -8,10 +8,7 @@
   const backgroundColor = ref('')
   const showWeatherCard = ref(true)
   const isDay = ref(0)
-
-  // default location when user's location not found
-  // const location = ref('Washington DC')
-
+  
   const currentLocation = ref('Fairfax')
   const location = ref(currentLocation.value)
 

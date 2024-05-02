@@ -3,7 +3,7 @@
     import Details from './Details.vue'
 
     import axios from 'axios'
-    import { ref, onMounted, provide, watchEffect } from 'vue'
+    import { ref, provide, watchEffect } from 'vue'
 
     const props = defineProps({
         location: {

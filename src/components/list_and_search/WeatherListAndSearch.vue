@@ -55,6 +55,7 @@
 
             // add new city
             cities.value.push(summary)
+            console.log(summary)
 
             // save to localstorage 
             localStorage.cities = JSON.stringify(cities.value)

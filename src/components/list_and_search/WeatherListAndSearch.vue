@@ -44,7 +44,8 @@
     // [1/2] empty localStorage.cities:
     // const cities = ref([])
 
-    const cities = ref(JSON.parse(localStorage.cities))
+    // const cities = ref(JSON.parse(localStorage.cities))
+    const cities = ref('')
 
     const addNewCity = (summary) => {
         if(newCityValidation(summary)) {

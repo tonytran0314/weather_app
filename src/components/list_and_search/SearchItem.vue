@@ -69,7 +69,6 @@
         
     const emitNewCity = () => {
         emit('newCity', summary)
-        console.log('in search item')
     }
 
     const getTime = (dateTime) => {

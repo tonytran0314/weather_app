@@ -44,13 +44,11 @@
     // [1/2] empty localStorage.cities:
     // const cities = ref([])
 
-    const cities = localStorage.cities == undefined ? ref('') : ref(JSON.parse(localStorage.cities))
+    const cities = localStorage.cities == undefined ? ref([]) : ref(JSON.parse(localStorage.cities))
 
     const addNewCity = (summary) => {
         if(newCityValidation(summary)) {
             hideSearchRecommend()
-            console.log(summary)
-            console.log(cities.value)
         
             // [2/2] empty localStorage.cities:
             // localStorage.cities = JSON.stringify([])

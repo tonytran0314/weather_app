@@ -49,13 +49,13 @@
     const addNewCity = (summary) => {
         if(newCityValidation(summary)) {
             hideSearchRecommend()
+            console.log(summary)
         
             // [2/2] empty localStorage.cities:
             // localStorage.cities = JSON.stringify([])
 
             // add new city
             cities.value.push(summary)
-            console.log(summary)
 
             // save to localstorage 
             localStorage.cities = JSON.stringify(cities.value)
